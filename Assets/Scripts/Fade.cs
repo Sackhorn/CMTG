@@ -6,9 +6,8 @@ public class Fade : MonoBehaviour
 {
 	private float _fade;
 
-	private const float FadeTime = 0.4f;
-
 	private string NextLevelName;
+    private float FadeTime;
 	private Material _material;
 
 	// Use this for initialization
@@ -26,7 +25,7 @@ public class Fade : MonoBehaviour
 	{
 		_fade += Time.deltaTime;
 
-        _material.SetFloat("_pos", 1 - _fade / FadeTime);
+		_material.SetFloat("_pos", _fade * _fade / FadeTime);
 
 		if (_fade >= FadeTime)
 		{
@@ -34,7 +33,7 @@ public class Fade : MonoBehaviour
 		}
 	}
 
-	public static void FadeThisSit(string nextScene)
+	public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
 	{
 		var fade = Object.FindObjectOfType(typeof(Fade)) as Fade;
 
@@ -44,6 +43,7 @@ public class Fade : MonoBehaviour
 			GameObject go = Instantiate(prefab, new Vector3(0,0,-1.0f), Quaternion.identity) as GameObject;
 			fade = go.GetComponent<Fade>();
 			fade.NextLevelName = nextScene;
+            fade.FadeTime = fadeTime;
 		}
 	}
 }

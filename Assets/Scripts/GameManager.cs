@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
+
 	static public bool isActive
 	{
 		get
@@ -29,5 +31,19 @@ public class GameManager : MonoBehaviour
 			}
 			return _instance;
 		}
+	}
+
+	public void StartMiniGame(float seconds)
+	{
+		Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefarbs/Timming.prefab", typeof(GameObject));
+		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+		var timming = go.GetComponent<Timming>();
+		timming.TotalTime = seconds;
+		timming.OnFinish = onTimmingEnd;
+	}
+
+	private void onTimmingEnd()
+	{
+        Fade.FadeThisSit("gameKurwaOver", 0.1f);
 	}
 }

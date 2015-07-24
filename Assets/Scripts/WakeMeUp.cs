@@ -19,44 +19,27 @@ public class WakeMeUp : MonoBehaviour
 	private Vector3 _leftEyeInitPos;
 	private Vector3 _rightEyeInitPos;
 
+	private const float _eyesHeight = 7.2f;
+
 	// Use this for initialization
-	void Start ()
+	private void Start()
 	{
-		// center head
-	   var headSprite = Head.GetComponent<SpriteRenderer>();
-		var headSpriteSize = headSprite.sprite.textureRect;
-		Debug.LogWarning(headSpriteSize);
-		Debug.LogWarning(Screen.width);
-		Head.transform.localScale = new Vector3(Screen.width / headSpriteSize.width, Screen.height / headSpriteSize.height, 1);
-
-
-
-	   // transform.localScale = new Vector3(1, 1, 1);
-
-	   float width = headSprite.sprite.bounds.size.x;
-		float height = headSprite.sprite.bounds.size.y;
-
-
-		float worldScreenHeight = Camera.main.orthographicSize * 2f;
-		float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
-
-		Vector3 xWidth = transform.localScale;
-		xWidth.x = worldScreenWidth / width * 1.1f;
-		headSprite.transform.localScale = new Vector3(xWidth.x, xWidth.x);
-
 		// cache objects
-        _leftEye = Head.transform.FindChild("LeftEye").gameObject;
-        _rightEye = Head.transform.FindChild("RightEye").gameObject;
+		_leftEye = Head.transform.FindChild("LeftEye").gameObject;
+		_rightEye = Head.transform.FindChild("RightEye").gameObject;
 
 		// cache eyes init positions set via editor
-		_leftEyeInitPos = _leftEye.transform.position;
-		_rightEyeInitPos = _rightEye.transform.position;
+        _leftEyeInitPos = _leftEye.transform.localPosition;
+        _rightEyeInitPos = _rightEye.transform.localPosition;
 
 		// clear state
 		_leftEyePos = 0;
 		_rightEyePos = 0;
+
+        // Start timming
+        GameManager.Instance.StartMiniGame(10);
 	}
-	
+
 	// Update is called once per frame
 	private void Update()
 	{
@@ -65,13 +48,13 @@ public class WakeMeUp : MonoBehaviour
 			return;
 
 		// check input
-		if (Input.GetKeyDown(KeyCode.A))
+		if (Input.GetMouseButtonDown(0))
 		{
-			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (15 - _leftEyePos * 3);
+			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (21 - _leftEyePos * 2.8f);
 		}
-		if (Input.GetKeyDown(KeyCode.D))
+		if (Input.GetMouseButtonDown(1))
 		{
-			_rightEyePos += Time.deltaTime * RightEyeSpeed * (14 - _rightEyePos * 3);
+			_rightEyePos += Time.deltaTime * RightEyeSpeed * (20.4f - _rightEyePos * 2.4f);
 		}
 
 		// cheating
@@ -79,6 +62,13 @@ public class WakeMeUp : MonoBehaviour
 		{
 			_rightEyePos = _leftEyePos = 1;
 		}
+
+        // center UI
+        var headSprite = Head.GetComponent<SpriteRenderer>();
+        float worldScreenWidth = Camera.main.orthographicSize * 2f / Screen.height * Screen.width;
+        Vector3 xWidth = transform.localScale;
+        xWidth.x = worldScreenWidth / headSprite.sprite.bounds.size.x * 1.1f;
+        headSprite.transform.localScale = new Vector3(xWidth.x, xWidth.x, 1);
 		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
@@ -100,8 +90,8 @@ public class WakeMeUp : MonoBehaviour
 			_rightEyePos = Mathf.Clamp01(_rightEyePos);
 
 			// move eyes
-			_leftEye.transform.position = _leftEyeInitPos + new Vector3(0, _leftEyePos * 4, 0);
-			_rightEye.transform.position = _rightEyeInitPos + new Vector3(0, _rightEyePos * 4, 0);
+			_leftEye.transform.localPosition = _leftEyeInitPos + new Vector3(0, _leftEyePos * _eyesHeight, 0);
+            _rightEye.transform.localPosition = _rightEyeInitPos + new Vector3(0, _rightEyePos * _eyesHeight, 0);
 		}
 	}
 }
