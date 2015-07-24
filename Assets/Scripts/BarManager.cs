@@ -12,14 +12,40 @@ public class BarManager : MonoBehaviour
     public float widithFactor;
 
     private Rigidbody2D rigidbody2D;
+    private SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start()
     {
         rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        secondsToChange = 2;
         StartCoroutine("ChangeDirection");
         gameObject.GetComponent<Transform>().localScale = new Vector3(widithFactor, 1, 1);
-        rigidbody2D.velocity = new Vector2(speed, 0f);
+  
+
+    }
+
+    void Update()
+    {
+        float green;
+        float blue;
+        float difference = Mathf.Abs(gameObject.transform.position.x - stroke.position.x);
+
+        difference = (difference / (widithFactor/2))*2 ;
+
+        if (difference > 1)
+        {
+            blue = 1;
+            green = difference - 1;
+        } else {
+            green = 0;
+            blue = difference;
+        }
+
+        spriteRenderer.color = new Color(1f, 1f - green, 1f - blue);
+
+        
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -41,9 +67,9 @@ public class BarManager : MonoBehaviour
     IEnumerator ChangeDirection()
     {
 
-        secondsToChange = Random.Range(minTime, maxTime);
+        
         yield return new WaitForSeconds(secondsToChange);
-
+        secondsToChange = Random.Range(minTime, maxTime);
         speed = -speed;
 
         rigidbody2D.velocity = new Vector2(speed, 0f);
