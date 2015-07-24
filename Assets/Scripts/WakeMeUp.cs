@@ -64,9 +64,9 @@ public class WakeMeUp : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-        // check if update more
-        if(_rightEyePos == 100)
-            return;
+		// check if update more
+		if(_rightEyePos == 100)
+			return;
 
 		// check input
 		if (Input.GetKeyDown(KeyCode.A))
@@ -76,16 +76,19 @@ public class WakeMeUp : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.D))
 		{
 			_rightEyePos += Time.deltaTime * RightEyeSpeed * (14 - _rightEyePos * 3);
-
-		    _rightEyePos = 1;
-		    _leftEyePos = 1;
 		}
 
+		// cheating
+		if (Input.GetKeyDown(KeyCode.RightAlt))
+		{
+			_rightEyePos = _leftEyePos = 1;
+		}
+		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
 		{
 			// Game won
-		    _rightEyePos = 100;
+			_rightEyePos = 100;
 			Fade.FadeThisSit("testScene2");
 		}
 		else

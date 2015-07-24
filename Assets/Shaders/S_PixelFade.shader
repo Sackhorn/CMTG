@@ -6,13 +6,15 @@ Properties{
 		_Pixelozowe("Pixelozowe", 2D) = "black" {}
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_ColorRamp("Cutout (A)", 2D) = "white" {}
-		_Cutoff("Alpha cutoff", Range(0, 1)) = 0.5
+		_pos("Alpha cutoff", Range(0, 1)) = 1
 }
 SubShader{
 		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" }
 		LOD 200
 		Lighting Off
 		Cull Back
+		Blend DstColor Zero
+
 		Pass
 		{
 			CGPROGRAM
@@ -26,7 +28,7 @@ SubShader{
 			sampler _Pixelozowe;
 			sampler2D _MainTex;
 			sampler2D _ColorRamp;
-			float _Cutoff;
+			float _pos;
 
 			struct v2f
 			{
@@ -45,7 +47,7 @@ SubShader{
 
 			half4 frag(v2f i) : COLOR
 			{
-				half2 uv = i.screenPos.xy;
+				/*half2 uv = i.screenPos.xy;
 
 				half2 pixelPos = half2(_ScreenWidth, _ScreenHeight) * uv;
 				//uv = floor(uv);
@@ -60,15 +62,15 @@ SubShader{
 				color = tex2D(_Pixelozowe, pixelPos);
 
 				float4 texel = tex2D(_MainTex, uv);
-				float2 colorIndex = float2(texel[0], max(_Cutoff, 0.06f));
+				float2 colorIndex = float2(texel[0], max(_pos, 0.06f));
 				float4 outColor = tex2D(_ColorRamp, colorIndex);
 				//o.Albedo.xyz = half3(outColor.rgb * float3(1,0,0));
 				//o.Alpha = outColor.r;
-				color = outColor.r;
+				color *= ceil(outColor.r);*/
 
+				half color = _pos;
 
-
-				return half4(color, color, color, 1);
+				return half4(color, color, color, color);
 			}
 
 			ENDCG

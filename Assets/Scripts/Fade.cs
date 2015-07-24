@@ -6,24 +6,27 @@ public class Fade : MonoBehaviour
 {
 	private float _fade;
 
-	private const float FadeTime = 1.0f;
+	private const float FadeTime = 0.4f;
 
 	private string NextLevelName;
+	private Material _material;
 
 	// Use this for initialization
 	void Start ()
 	{
 		_fade = 0.0f;
 
-		var mat = gameObject.GetComponent<MeshRenderer>().material;
-		mat.SetFloat("_ScreenWidth", Screen.width);
-		mat.SetFloat("_ScreenHeight", Screen.height);
+		_material = gameObject.GetComponent<MeshRenderer>().material;
+		_material.SetFloat("_ScreenWidth", Screen.width);
+		_material.SetFloat("_ScreenHeight", Screen.height);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		_fade += Time.deltaTime;
+
+        _material.SetFloat("_pos", 1 - _fade / FadeTime);
 
 		if (_fade >= FadeTime)
 		{
