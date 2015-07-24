@@ -32,7 +32,7 @@ public class BarManager : MonoBehaviour
         float blue;
         float difference = Mathf.Abs(gameObject.transform.position.x - stroke.position.x);
 
-        difference = (difference / (widithFactor/2))*2 ;
+        difference = (difference / (widithFactor/2))/16 ;
 
         if (difference > 1)
         {
@@ -61,6 +61,7 @@ public class BarManager : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
+        if(collision.gameObject.tag == "stroke")
         Debug.Log("Przegrałeś");
     }
 
