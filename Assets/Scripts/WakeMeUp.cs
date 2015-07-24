@@ -3,7 +3,8 @@ using System.Collections;
 
 public class WakeMeUp : MonoBehaviour
 {
-	public GameObject Canvas;
+	//public GameObject Canvas;
+	public GameObject Head;
 
 	public float LeftEyeSpeed = 0.09f;
 	public float RightEyeSpeed = 0.15f;
@@ -22,17 +23,17 @@ public class WakeMeUp : MonoBehaviour
 	void Start ()
 	{
 		// center head
-	   /* var headSprite = Head.GetComponent<SpriteRenderer>();
+	   var headSprite = Head.GetComponent<SpriteRenderer>();
 		var headSpriteSize = headSprite.sprite.textureRect;
 		Debug.LogWarning(headSpriteSize);
 		Debug.LogWarning(Screen.width);
-		Head.transform.localScale = new Vector3(Screen.width / headSpriteSize.width, Screen.height / headSpriteSize.height, 1);*/
+		Head.transform.localScale = new Vector3(Screen.width / headSpriteSize.width, Screen.height / headSpriteSize.height, 1);
 
 
 
 	   // transform.localScale = new Vector3(1, 1, 1);
 
-	   /* float width = headSprite.sprite.bounds.size.x;
+	   float width = headSprite.sprite.bounds.size.x;
 		float height = headSprite.sprite.bounds.size.y;
 
 
@@ -40,17 +41,12 @@ public class WakeMeUp : MonoBehaviour
 		float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
 		Vector3 xWidth = transform.localScale;
-		xWidth.x = worldScreenWidth / width;
-		headSprite.transform.localScale = new Vector3(xWidth, );
-		//transform.localScale.x = worldScreenWidth / width;
-	  //  Vector3 yHeight = transform.localScale;
-	   // yHeight.y = worldScreenHeight / height;
-	   // headSprite.transform.localScale = yHeight;
-//        headSprite.transform.localScale.y = worldScreenHeight / height;*/
+		xWidth.x = worldScreenWidth / width * 1.1f;
+		headSprite.transform.localScale = new Vector3(xWidth.x, xWidth.x);
 
 		// cache objects
-		_leftEye = Canvas.transform.FindChild("LeftEye").gameObject;
-		_rightEye = Canvas.transform.FindChild("RightEye").gameObject;
+        _leftEye = Head.transform.FindChild("LeftEye").gameObject;
+        _rightEye = Head.transform.FindChild("RightEye").gameObject;
 
 		// cache eyes init positions set via editor
 		_leftEyeInitPos = _leftEye.transform.position;
@@ -64,21 +60,32 @@ public class WakeMeUp : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		// check if update more
+		if(_rightEyePos == 100)
+			return;
+
 		// check input
 		if (Input.GetKeyDown(KeyCode.A))
 		{
-			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (14 - _leftEyePos * 3);
+			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (15 - _leftEyePos * 3);
 		}
 		if (Input.GetKeyDown(KeyCode.D))
 		{
-			_rightEyePos += Time.deltaTime * RightEyeSpeed * (13 - _rightEyePos * 3);
+			_rightEyePos += Time.deltaTime * RightEyeSpeed * (14 - _rightEyePos * 3);
 		}
 
+		// cheating
+		if (Input.GetKeyDown(KeyCode.RightAlt))
+		{
+			_rightEyePos = _leftEyePos = 1;
+		}
+		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
 		{
 			// Game won
-			Debug.LogWarning("Win");
+			_rightEyePos = 100;
+			Fade.FadeThisSit("testScene2");
 		}
 		else
 		{

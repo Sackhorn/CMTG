@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Oczy
+    uniqueID: 3758802447
+    locked: 0
+  - name: Powieki
+    uniqueID: 2880134599
+    locked: 0
+  - name: Twarz
+    uniqueID: 2861154075
+    locked: 0
