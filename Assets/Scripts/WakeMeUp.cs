@@ -64,21 +64,29 @@ public class WakeMeUp : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+        // check if update more
+        if(_rightEyePos == 100)
+            return;
+
 		// check input
 		if (Input.GetKeyDown(KeyCode.A))
 		{
-			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (14 - _leftEyePos * 3);
+			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (15 - _leftEyePos * 3);
 		}
 		if (Input.GetKeyDown(KeyCode.D))
 		{
-			_rightEyePos += Time.deltaTime * RightEyeSpeed * (13 - _rightEyePos * 3);
+			_rightEyePos += Time.deltaTime * RightEyeSpeed * (14 - _rightEyePos * 3);
+
+		    _rightEyePos = 1;
+		    _leftEyePos = 1;
 		}
 
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
 		{
 			// Game won
-			Debug.LogWarning("Win");
+		    _rightEyePos = 100;
+			Fade.FadeThisSit("testScene2");
 		}
 		else
 		{

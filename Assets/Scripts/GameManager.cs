@@ -4,13 +4,13 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
-    static public bool isActive
-    {
-        get
-        {
-            return _instance != null;
-        }
-    }
+	static public bool isActive
+	{
+		get
+		{
+			return _instance != null;
+		}
+	}
 
 	public static GameManager Instance
 	{
