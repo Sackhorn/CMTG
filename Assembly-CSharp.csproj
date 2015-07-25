@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{B2B58FB2-4462-6B0C-A872-40DD957E5FE0}</ProjectGuid>
+	<ProjectGuid>{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -46,9 +46,28 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DestroyerScript.cs" />
+     <Compile Include="Assets\HealthPoints.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
+     <Compile Include="Assets\Papierki_scene\Skrypty\CameraScript.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\GoodPapierek.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs" />
+     <Compile Include="Assets\Papierki_scene\Skrypty\Player_Script.cs" />
+     <Compile Include="Assets\Papierki_scene\Skrypty\TablicaScript.cs" />
+     <Compile Include="Assets\Scripts\ArrowMovement.cs" />
+     <Compile Include="Assets\Scripts\BarManager.cs" />
+     <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
+     <Compile Include="Assets\Scripts\CollideCheck.cs" />
+     <Compile Include="Assets\Scripts\Fade.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
+     <Compile Include="Assets\Scripts\SpawnScript.cs" />
+     <Compile Include="Assets\Scripts\StrokeManager.cs" />
+     <Compile Include="Assets\Scripts\Timming.cs" />
+     <Compile Include="Assets\Scripts\WakeMeUp.cs" />
+     <None Include="Assets\Shaders\S_PixelFade.shader" />
+     <None Include="Assets\Shaders\S_Timming.shader" />
+     <None Include="Assets\Shaders\S_CameraFade.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
