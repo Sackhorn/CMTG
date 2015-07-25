@@ -5,11 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-<<<<<<< HEAD
 	<ProjectGuid>{7DCF406E-E7B4-AE7A-1C7C-1AC8A5F0B33A}</ProjectGuid>
-=======
-	<ProjectGuid>{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}</ProjectGuid>
->>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -50,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DancerMovement.cs" />
      <Compile Include="Assets\DestroyerScript.cs" />
      <Compile Include="Assets\HealthPoints.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
@@ -60,13 +57,12 @@
 =======
      <Compile Include="Assets\Papierki_scene\Skrypty\Player_Script.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\TablicaScript.cs" />
->>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
+>>>>>>> 5c15f133f4ce4912da3359834a779531fe3fb345
      <Compile Include="Assets\Scripts\ArrowMovement.cs" />
      <Compile Include="Assets\Scripts\BarManager.cs" />
      <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
      <Compile Include="Assets\Scripts\CollideCheck.cs" />
      <Compile Include="Assets\Scripts\Fade.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\Scripts\FadeBlackToTransparent.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameOverLogic.cs" />
@@ -74,20 +70,12 @@
      <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
      <Compile Include="Assets\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Scripts\SpriteFit2Screen.cs" />
-=======
-     <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
-     <Compile Include="Assets\Scripts\SpawnScript.cs" />
->>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
      <Compile Include="Assets\Scripts\StrokeManager.cs" />
      <Compile Include="Assets\Scripts\Timming.cs" />
      <Compile Include="Assets\Scripts\WakeMeUp.cs" />
      <None Include="Assets\Shaders\S_PixelFade.shader" />
      <None Include="Assets\Shaders\S_Timming.shader" />
-<<<<<<< HEAD
      <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
-=======
->>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
      <None Include="Assets\Shaders\S_CameraFade.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>F:/Code/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

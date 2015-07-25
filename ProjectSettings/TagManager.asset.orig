@@ -3,6 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags:
   - leftBorder
   - rightBorder
@@ -11,12 +12,12 @@ TagManager:
   - RightA
   - UpA
   - DownA
-<<<<<<< HEAD
   - border
   - Obstacle
-=======
->>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
   - Papierki_Manager
+=======
+  tags: []
+>>>>>>> 5c15f133f4ce4912da3359834a779531fe3fb345
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - UI
   - 
   - 
-  - Background
+  - 
   - 
   - 
   - 
