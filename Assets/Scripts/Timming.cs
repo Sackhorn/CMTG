@@ -91,4 +91,9 @@ public class Timming : MonoBehaviour
     {
         get { return _currenTimming; }
     }
+
+    /*public static bool IsFading
+    {
+        get { return _currenTimming.Position == 0; }
+    }*/
 }

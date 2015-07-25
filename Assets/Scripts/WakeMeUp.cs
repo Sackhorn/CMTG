@@ -6,10 +6,9 @@ public class WakeMeUp : MonoBehaviour
 	public GameObject Head;
     public GameObject Budzik;
 	
-    public float MoveDownSpeed = 0.1f;
-    public float MoveUpSpeed = 0.1f;
-
-    public float cooldown;
+    public float MoveDownSpeed = 0.15f;
+    public float MoveUpSpeed = 0.3f;
+    public float cooldown = 3;
 
 	private GameObject _leftEye;
 	private GameObject _rightEye;

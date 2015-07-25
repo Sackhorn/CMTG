@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
 
 	public void NextLevel()
 	{
+		Debug.Log("Next level: " + _currentLevel);
 		_currentLevel++;
 		if (_currentLevel >= Levels.Length)
 		{
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
 		/// <summary>
 		/// Configuration fir the scene (custom for every one)
 		/// </summary>
-		public float[] Config;
+		public object[] Config;
 	}
 
 	public LevelDesc[] Levels =
@@ -160,7 +161,7 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "WakeMeUp",
 			FadeTime = 1.2f,
-			Config = new []
+			Config = new object[]
 			{
 				0.0f
 			}
@@ -169,7 +170,7 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "pickingUpGirl",
 			FadeTime = 0.4f,
-			Config = new []
+			Config = new object[]
 			{
 				0.0f
 			}
@@ -178,7 +179,7 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "Bridge",
 			FadeTime = 0.4f,
-			Config = new []
+			Config = new object[]
 			{
 				0.0f
 			}

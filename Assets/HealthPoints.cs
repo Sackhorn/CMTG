@@ -25,6 +25,9 @@ public class HealthPoints : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        /*if(Timming.IsFading)
+            return;*/
+
 		if(HP <= 0)
 		{
 			GameManager.Instance.GameOver();
