@@ -10,10 +10,12 @@ public class PlayerManager_Bridge : MonoBehaviour {
 	private bool falling;
 	private bool gameOver = false;
 	private Quaternion rotation;
+	public float kupa;
 	// Use this for initialization
 	
 	// Update is called once per frame
 	void Update () {
+		//Mathf.PingPong(Time.time,kupa);
 		if (timeToFall > startTimeToFall)
 		{
 			//Przegrana
@@ -24,12 +26,14 @@ public class PlayerManager_Bridge : MonoBehaviour {
 		else if (falling && !gameOver)
 		{
 			timeToFall += Time.deltaTime;
-			gameObject.transform.rotation = Quaternion.Euler(0f, 0f, (timeToFall / startTimeToFall) * angleToFall);
 		}
 		else if (gameOver)
 		{
 			gameObject.transform.rotation = Quaternion.Euler(0f, 0f, angleToFall);
+
 		}
+
+		gameObject.transform.rotation = Quaternion.Euler(0f, 0f, (timeToFall / startTimeToFall) * angleToFall * (Mathf.PingPong(Time.time,2)-1));
 	}
 			
 
