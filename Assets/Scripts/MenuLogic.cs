@@ -5,7 +5,7 @@ public class MenuLogic : MonoBehaviour
 {
 	void Start ()
 	{
-        GameManager.Instance.StartMiniGame(10.0f);
+        GameManager.Instance.StartMiniGame(0, 10.0f, -1);
 	}
 
 	public void doIt()

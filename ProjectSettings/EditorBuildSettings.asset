@@ -10,6 +10,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/WakeMeUp.unity
   - enabled: 1
+    path: Assets/Scenes/pickingUpGirl.unity
+  - enabled: 1
     path: Assets/Scenes/testScene2.unity
   - enabled: 1
     path: Assets/Scenes/gameKurwaOver.unity
