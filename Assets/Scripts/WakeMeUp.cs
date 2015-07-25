@@ -47,13 +47,14 @@ public class WakeMeUp : MonoBehaviour
 
         // Start timming
         GameManager.Instance.StartMiniGame(0, 20, -1);
-        Head.SetActive(true);
-
+        iTween.MoveTo(Head, Vector3.zero, 1f);
     }
 
 	// Update is called once per frame
 	private void Update()
 	{
+
+      
 		// check if update more
 		if(_rightEyePos == 100)
 			return;
