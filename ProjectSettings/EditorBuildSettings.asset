@@ -12,6 +12,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/pickingUpGirl.unity
   - enabled: 1
-    path: Assets/Scenes/testScene2.unity
+    path: Assets/Scenes/Bridge.unity
   - enabled: 1
     path: Assets/Scenes/gameKurwaOver.unity

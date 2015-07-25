@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class GameOverLogic : MonoBehaviour {
-
+public class GameOverLogic : MonoBehaviour
+{
 	// Use this for initialization
 	void Start ()
 	{

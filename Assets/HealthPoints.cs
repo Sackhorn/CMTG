@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
 
 public class HealthPoints : MonoBehaviour
 {
@@ -8,10 +7,8 @@ public class HealthPoints : MonoBehaviour
 
 	private void Start()
 	{
-		EditorUtility.audioMasterMute = false;
-		
+	    GameManager.Instance.StartMiniGame(0, 0, 25.0f);
 	}
-
 
 	// Update is called once per frame
 	void Update ()

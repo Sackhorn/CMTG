@@ -10,7 +10,8 @@ public class MenuLogic : MonoBehaviour
 
 	public void doIt()
 	{
-        Fade.FadeThisSit("WakeMeUp", 2.0f);
+        //Fade.FadeThisSit("WakeMeUp", 2.0f);
+        GameManager.Instance.NextLevel();
 	}
 
 	public void dontDoIt()
