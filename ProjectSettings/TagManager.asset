@@ -11,8 +11,11 @@ TagManager:
   - RightA
   - UpA
   - DownA
+<<<<<<< HEAD
   - border
   - Obstacle
+=======
+>>>>>>> 1066204538b0826a3721b3cdf43d27646292144a
   - Papierki_Manager
   layers:
   - Default
