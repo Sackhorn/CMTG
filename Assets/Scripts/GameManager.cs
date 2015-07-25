@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
 	private int _clicks;
 	private int _score;
-	private int _currentLevel;
+	private int _currentLevel = -1;
 	private int _currentDay;
 
 	public static bool isActive
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 		get { return _score; }
 	}
 
-	private void Start()
+	private void OnAwake()
 	{
 		ResetData();
 	}
@@ -99,9 +99,9 @@ public class GameManager : MonoBehaviour
 
 	public void NextLevel()
 	{
-		Debug.Log("Next level: " + _currentLevel);
 		_currentLevel++;
-		if (_currentLevel >= Levels.Length)
+
+        if (_currentLevel >= Levels.Length)
 		{
 			_currentLevel = 0;
 			_currentDay++;
