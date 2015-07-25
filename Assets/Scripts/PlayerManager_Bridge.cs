@@ -13,7 +13,7 @@ public class PlayerManager_Bridge : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        GameManager.Instance.StartMiniGame(0, 0, 30.0f);
+        GameManager.Instance.StartMiniGame(0, 30.0f, 0, 0);
     }
 
     // Update is called once per frame

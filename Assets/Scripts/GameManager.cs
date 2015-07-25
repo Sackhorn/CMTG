@@ -6,8 +6,9 @@ public class GameManager : MonoBehaviour
 	private static GameManager _instance;
 
 	private int _clicks;
+	private int _score;
 	private int _currentLevel;
-	private int _currentWeek;
+	private int _currentDay;
 
 	public static bool isActive
 	{
@@ -32,9 +33,14 @@ public class GameManager : MonoBehaviour
 			return _instance;
 		}
 	}
+
 	public int Clicks
 	{
 		get { return _clicks; }
+	}
+	public int Score
+	{
+		get { return _score; }
 	}
 
 	private void Start()
@@ -51,53 +57,83 @@ public class GameManager : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			GameOver();
+			/*if(_currentLevel == -1)
+			{
+				Exit();
+			}
+			else*/
+			{
+				GameOver();
+			}
 		}
 
-        if (Input.GetKeyDown(KeyCode.RightAlt))
-        {
-            NextLevel();
-        }
+		if (Input.GetKeyDown(KeyCode.RightAlt))
+		{
+			NextLevel();
+		}
 	}
 
 	/// <summary>
 	/// Create timming slider
 	/// </summary>
-	/// <param name="secondsBeforeStart">Amount of seconds before timer start</param>
 	/// <param name="secondsToLoose">Amount of seconds to game over (-1 to disable)</param>
 	/// <param name="secondsToWin">Amount of seconds to win a level (-1 to disable)</param>
-	public void StartMiniGame(float secondsBeforeStart, float secondsToLoose, float secondsToWin)
+	/// <param name="cooldownBefore">Amount of seconds before timer start</param>
+	/// <param name="cooldownAfter">Amount of seconds before timer end</param>
+	public void StartMiniGame(float secondsToLoose, float secondsToWin, float cooldownBefore, float cooldownAfter)
 	{
 		Object prefab = Resources.Load("Timming");
 		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
 		var timming = go.GetComponent<Timming>();
 		timming.SecondsToWin = secondsToWin;
-		timming.SecondsBeforeStart = secondsBeforeStart;
+		timming.CooldownAfter = cooldownAfter;
+		timming.CooldownBefore = cooldownBefore;
 		timming.SecondsToLoose = secondsToLoose;
 	}
 
 	public void GameOver()
-    {
+	{
+		_currentLevel = -1;
 		Fade.FadeThisSit("gameKurwaOver", 0.4f);
 	}
 
 	public void NextLevel()
 	{
-	    _currentLevel++;
-	    if (_currentLevel >= Levels.Length)
-	    {
-	        _currentLevel = 0;
-	        _currentWeek++;
-	    }
+		_currentLevel++;
+		if (_currentLevel >= Levels.Length)
+		{
+			_currentLevel = 0;
+			_currentDay++;
+		}
 
 		Fade.FadeThisSit(Levels[_currentLevel].Name, Levels[_currentLevel].FadeTime);
 	}
 
 	public void ResetData()
 	{
+		_score = 0;
 		_clicks = 0;
 		_currentLevel = -1;
-		_currentWeek = 0;
+		_currentDay = 0;
+	}
+
+	public void Exit()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
+		 Application.Quit();
+#endif
+	}
+
+	public void AddScore(float gain)
+	{
+		_score += (int)gain;
+	}
+
+	public void AddScore(int gain)
+	{
+		_score += gain;
 	}
 
 	public struct LevelDesc
@@ -123,7 +159,7 @@ public class GameManager : MonoBehaviour
 		new LevelDesc()
 		{
 			Name = "WakeMeUp",
-			FadeTime = 2.0f,
+			FadeTime = 1.2f,
 			Config = new []
 			{
 				0.0f
@@ -132,7 +168,7 @@ public class GameManager : MonoBehaviour
 		new LevelDesc()
 		{
 			Name = "pickingUpGirl",
-			FadeTime = 1.0f,
+			FadeTime = 0.4f,
 			Config = new []
 			{
 				0.0f
@@ -141,7 +177,7 @@ public class GameManager : MonoBehaviour
 		new LevelDesc()
 		{
 			Name = "Bridge",
-			FadeTime = 1.0f,
+			FadeTime = 0.4f,
 			Config = new []
 			{
 				0.0f
