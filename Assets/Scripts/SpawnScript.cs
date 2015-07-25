@@ -21,12 +21,12 @@ public class SpawnScript : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        time += Time.deltaTime;
+        /*time += Time.deltaTime;
 
         if (time >= spawnTime)
         {
             Instantiate(obj[Mathf.RoundToInt(Random.Range(min, max))], gameObject.transform.position + new Vector3(off, 0, 0), Quaternion.identity);
             time = 0;
-        }
+        }*/
     }
 }
