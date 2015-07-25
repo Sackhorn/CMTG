@@ -15,6 +15,7 @@ public class Papierek_Manager_Script : MonoBehaviour {
 	public float nextApperance=1f;
 	public GameObject GoodPapierek;
 	public GameObject BadPapierek;
+	public SpriteRenderer tablica;
 	public float BadPapierekProbabiity=0.5f;
 	int maxPapiereksOnScene;
 	int score;
@@ -51,20 +52,23 @@ public class Papierek_Manager_Script : MonoBehaviour {
 
 	void GenerateNewPapierek()
 	{	
-		GameObject tempPapierek;
-		float width = Random.Range (-Camera.main.orthographicSize*Screen.width/Screen.height, Camera.main.orthographicSize*Screen.width/Screen.height);
-		float height = Random.Range (-Camera.main.orthographicSize, Camera.main.orthographicSize); 
+		float posX =tablica.transform.position.x;
+		float posY =tablica.transform.position.y;
+		float tabWidth = tablica.bounds.size.x;
+		float tabHeight = tablica.bounds.size.y;
+		float width = Random.Range (posX-tabWidth/2+17,posX+tabWidth/2-17);
+		float height = Random.Range (posY-tabHeight/2+12,posY+tabHeight/2-12); 
 		Vector2 papiereksPosition = new Vector2 (width,height);
 		bool isPapierekBad = RandBool();
 		if (isPapierekBad) 
 		{
 			Debug.Log ("Nowy Papierek jest generowany");
-		tempPapierek=(GameObject)Instantiate (BadPapierek,papiereksPosition, Quaternion.identity);
+			Instantiate (BadPapierek,papiereksPosition, Quaternion.identity);
 		} 
 		else 
 		{
 			Debug.Log ("Nowy Papierek jest generowany");
-			tempPapierek=(GameObject)Instantiate (GoodPapierek, papiereksPosition, Quaternion.identity);
+			Instantiate (GoodPapierek, papiereksPosition, Quaternion.identity);
 		}
 	}
 
@@ -99,7 +103,7 @@ public class Papierek_Manager_Script : MonoBehaviour {
 		else
 		{	if(areYouDead){
 			StartCoroutine(PaperCut());
-				papierekLifeSpan=5.0f;
+				papierekLifeSpan=20.0f;
 			}
 			areYouDead=false;
 			Debug.Log("Dedłeś");

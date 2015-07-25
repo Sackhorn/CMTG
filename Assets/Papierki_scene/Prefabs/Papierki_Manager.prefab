@@ -42,12 +42,13 @@ MonoBehaviour:
   papierekLifeSpan: 5
   papierkiCount: 14
   papierkiNumb: 10
-  lifesLeft: -39
+  lifesLeft: 3
   minApperanceTime: .300000012
   maxApperanceTime: 2
   nextApperance: .255859911
   GoodPapierek: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
-  BadPapierek: {fileID: 155578, guid: 6c116ce879694414e944a18fb0cdb393, type: 2}
+  BadPapierek: {fileID: 118104, guid: 248328480cf5d6649b690db813472752, type: 2}
+  tablica: {fileID: 0}
   BadPapierekProbabiity: .5
 --- !u!1001 &100100000
 Prefab:
@@ -55,7 +56,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: BadPapierek
+      value: 
+      objectReference: {fileID: 118104, guid: 248328480cf5d6649b690db813472752, type: 2}
+    - target: {fileID: 0}
+      propertyPath: lifesLeft
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162922}

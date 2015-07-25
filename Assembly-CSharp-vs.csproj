@@ -49,6 +49,7 @@
      <Compile Include="Assets\DestroyerScript.cs" />
      <Compile Include="Assets\HealthPoints.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
+     <Compile Include="Assets\Papierki_scene\Skrypty\CameraScript.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\GoodPapierek.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs" />
      <Compile Include="Assets\Scripts\ArrowMovement.cs" />
