@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class MenuLogic : MonoBehaviour
 {
-	void Start ()
-	{
-        GameManager.Instance.StartMiniGame(0, 10.0f, -1);
-	}
+    private void Start()
+    {
+        GameManager.Instance.StartMiniGame(10.0f, -1, 0, 0);
+    }
 
-	public void doIt()
+    public void doIt()
 	{
         //Fade.FadeThisSit("WakeMeUp", 2.0f);
         GameManager.Instance.NextLevel();
@@ -16,10 +16,6 @@ public class MenuLogic : MonoBehaviour
 
 	public void dontDoIt()
 	{
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-         Application.Quit();
-#endif
+	    GameManager.Instance.Exit();
 	}
 }
