@@ -62,13 +62,6 @@ public class WakeMeUp : MonoBehaviour
 		{
 			_rightEyePos = _leftEyePos = 1;
 		}
-
-		// center UI
-		var headSprite = Head.GetComponent<SpriteRenderer>();
-		float worldScreenWidth = Camera.main.orthographicSize * 2f / Screen.height * Screen.width;
-		Vector3 xWidth = transform.localScale;
-		xWidth.x = worldScreenWidth / headSprite.sprite.bounds.size.x * 1.1f;
-		headSprite.transform.localScale = new Vector3(xWidth.x, xWidth.x, 1);
 		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
