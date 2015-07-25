@@ -126,6 +126,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2046444, guid: 50e73242af487664399d9fd629479ec5, type: 2}
+      propertyPath: orthographic size
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50e73242af487664399d9fd629479ec5, type: 2}
   m_IsPrefabParent: 0
@@ -198,6 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dbf9d6f0b380549bf208b021eaf4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 2
 --- !u!1 &595009013
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,8 +241,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -536164849
-  m_SortingOrder: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300006, guid: dffb16656cb62144483e6e23ae27f602, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &595009015

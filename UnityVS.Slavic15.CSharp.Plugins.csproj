@@ -5,16 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2AF14984-E14D-8E64-057F-91A3C68B4AD7}</ProjectGuid>
+    <ProjectGuid>{DB28576E-337F-D20F-C5CD-C30D69D8EC8B}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
-    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityProjectType>GamePlugins:3</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.2f1</UnityVersion>
     <RootNamespace></RootNamespace>
@@ -68,31 +68,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UnityVS.Slavic15.CSharp.Plugins.csproj">
-      <Project>{DB28576E-337F-D20F-C5CD-C30D69D8EC8B}</Project>
-      <Name>UnityVS.Slavic15.CSharp.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\DestroyerScript.cs" />
-    <Compile Include="Assets\HealthPoints.cs" />
-    <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
-    <Compile Include="Assets\Papierki_scene\Skrypty\GoodPapierek.cs" />
-    <Compile Include="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs" />
-    <Compile Include="Assets\Scripts\ArrowMovement.cs" />
-    <Compile Include="Assets\Scripts\BarManager.cs" />
-    <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
-    <Compile Include="Assets\Scripts\CollideCheck.cs" />
-    <Compile Include="Assets\Scripts\Fade.cs" />
-    <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\MenuLogic.cs" />
-    <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
-    <Compile Include="Assets\Scripts\SpawnScript.cs" />
-    <Compile Include="Assets\Scripts\SpriteFit2Screen.cs" />
-    <Compile Include="Assets\Scripts\StrokeManager.cs" />
-    <Compile Include="Assets\Scripts\Timming.cs" />
-    <Compile Include="Assets\Scripts\UIFit2Screen.cs" />
-    <Compile Include="Assets\Scripts\WakeMeUp.cs" />
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\MoveSample.cs" />
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\RotateSample.cs" />
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\Sample\SampleInfo.cs" />
+    <Compile Include="Assets\Plugins\Pixelplacement\iTween\iTween.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
