@@ -17,22 +17,22 @@ public class CollideCheck : MonoBehaviour
         {
             if (_leftA == true && Input.GetKeyDown(KeyCode.A))
             {
-                Destroy(obj, 0);
+                trafione();
                 _leftA = false;
             }
             else if (_rightA == true && Input.GetKeyDown(KeyCode.D))
             {
-                Destroy(obj, 0);
+                trafione();
                 _rightA = false;
             }
             else if (_upA == true && Input.GetKeyDown(KeyCode.W))
             {
-                Destroy(obj, 0);
+                trafione();
                 _upA = false;
             }
             else if (_downA == true && Input.GetKeyDown(KeyCode.S))
             {
-                Destroy(obj, 0);
+                trafione();
                 _downA = false;
             }
             else
@@ -40,6 +40,12 @@ public class CollideCheck : MonoBehaviour
                 HealthPoints.decreaseHP();
             }
         }
+    }
+
+    private void trafione()
+    {
+        GameManager.Instance.AddScore(10);
+        Destroy(obj);
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
