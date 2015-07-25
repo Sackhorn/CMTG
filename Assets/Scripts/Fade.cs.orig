@@ -5,17 +5,60 @@ using UnityEditor;
 [RequireComponent(typeof(Camera))]
 public class Fade : MonoBehaviour
 {
+<<<<<<< HEAD
+    private float _fade;
+
+    private const float FadeTime = 0.4f;
+
+    private string NextLevelName;
+    private Material _material;
+
+    // Use this for initialization
+    void Start()
+    {
+        _fade = 0.0f;
+
+        _material = gameObject.GetComponent<MeshRenderer>().material;
+        _material.SetFloat("_ScreenWidth", Screen.width);
+        _material.SetFloat("_ScreenHeight", Screen.height);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        _fade += Time.deltaTime;
+
+        _material.SetFloat("_pos", 1 - _fade / FadeTime);
+
+        if (_fade >= FadeTime)
+        {
+            Application.LoadLevel(NextLevelName);
+        }
+    }
+
+    public static void FadeThisSit(string nextScene)
+    {
+        var fade = Object.FindObjectOfType(typeof(Fade)) as Fade;
+
+        if (fade == null)
+        {
+            Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefarbs/Fade.prefab", typeof(GameObject));
+            GameObject go = Instantiate(prefab, new Vector3(0, 0, -1.0f), Quaternion.identity) as GameObject;
+            fade = go.GetComponent<Fade>();
+            fade.NextLevelName = nextScene;
+        }
+=======
     public Shader Shader = null;
 
     private Material ccMaterial;
     private float _fade;
-	private string NextLevelName;
+    private string NextLevelName;
     private float FadeTime;
-
-	// Use this for initialization
+    
+    // Use this for initialization
     private void Start()
-	{
-		_fade = 0.0f;
+    {
+        _fade = 0.0f;
         NextLevelName = null;
 
         ccMaterial = CheckShaderAndCreateMaterial(Shader, ccMaterial);
@@ -46,29 +89,29 @@ public class Fade : MonoBehaviour
                 return m2Create;
             else return null;
         }
-	}
-	
+    }
+
     private void Update()
     {
         if (NextLevelName != null)
-	{
-		_fade += Time.deltaTime;
+        {
+            _fade += Time.deltaTime;
 
-		if (_fade >= FadeTime)
-		{
+            if (_fade >= FadeTime)
+            {
                 var toLoad = NextLevelName;
                 NextLevelName = null;
                 Debug.LogWarning("Loading: " + toLoad);
                 Application.LoadLevel(toLoad);
                 _fade = 1.0f;
             }
-		}
+        }
 
         ccMaterial.SetFloat("_pos", _fade / FadeTime);
-	}
+    }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
-	{
+    {
         if (_fade == 0)
             Graphics.Blit(source, destination);
         else
@@ -76,10 +119,11 @@ public class Fade : MonoBehaviour
     }
 
     public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
-		{
+    {
         var cam = GameObject.Find("Camera");
         var fade = cam.GetComponent<Fade>();
-			fade.NextLevelName = nextScene;
+        fade.NextLevelName = nextScene;
         fade.FadeTime = fadeTime;
-	}
+>>>>>>> 38160234521dc68f7ba7e106991946832bc0282d
+    }
 }
