@@ -9,6 +9,8 @@ public class WakeMeUp : MonoBehaviour
 	public float LeftEyeSpeed = 0.09f;
 	public float RightEyeSpeed = 0.15f;
 
+    public float cooldown;
+
 	private GameObject _leftEye;
 	private GameObject _rightEye;
 
@@ -36,13 +38,23 @@ public class WakeMeUp : MonoBehaviour
 		_leftEyePos = 0;
 		_rightEyePos = 0;
 
-		// Start timming
-		GameManager.Instance.StartMiniGame(0, 20, -1);
+        StartCoroutine("StartGame");
 	}
+
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(cooldown);
+
+        // Start timming
+        GameManager.Instance.StartMiniGame(0, 20, -1);
+        iTween.MoveTo(Head, Vector3.zero, 1f);
+    }
 
 	// Update is called once per frame
 	private void Update()
 	{
+
+      
 		// check if update more
 		if(_rightEyePos == 100)
 			return;
@@ -56,20 +68,13 @@ public class WakeMeUp : MonoBehaviour
 		{
 			_rightEyePos += Time.deltaTime * RightEyeSpeed * (20.4f - _rightEyePos * 2.4f);
 		}
-
-		// cheating
-		if (Input.GetKeyDown(KeyCode.RightAlt))
-		{
-			_rightEyePos = _leftEyePos = 1;
-		}
 		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
 		{
 			// Game won
 			_rightEyePos = 100;
-			//Fade.FadeThisSit("testScene2");
-			Fade.FadeThisSit("pickingUpGirl");
+            GameManager.Instance.NextLevel();
 		}
 		else
 		{

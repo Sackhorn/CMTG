@@ -27,8 +27,8 @@ public class Timming : MonoBehaviour
         if ((SecondsToLoose > 0 && Time >= SecondsToLoose) || (SecondsToWin > 0 && Time >= SecondsToWin))
             return;
         
-       //Time += UnityEngine.Time.deltaTime;
-        Time = 0;
+       Time += UnityEngine.Time.deltaTime;
+       // Time = 0;
 
         float realTime = Time - SecondsBeforeStart;
         if (realTime < 0)
@@ -48,16 +48,18 @@ public class Timming : MonoBehaviour
             pos = 1 - realTime / SecondsToLoose;
         else
             pos = 1 - realTime / SecondsToWin;
+        //pos = 1;
 
         var cam = Camera.main;
         if (cam != null)
         {
             var res = Screen.currentResolution;
+            Vector3 camPos = cam.transform.position;
             float h = cam.orthographicSize;
             gameObject.transform.localScale = new Vector3(pos * pos * res.width * h * 0.00184f, h / 30, 1);
-            gameObject.transform.position = new Vector3(0, 0.00091f * h * res.height, -1);
+            gameObject.transform.position = new Vector3(camPos.x, camPos.y + 0.000916f * h * res.height, -1);
         }
 
-        _material.SetFloat("_pos", 1 - Time * Time / realTime);
+        _material.SetFloat("_pos", pos);
     }
 }
