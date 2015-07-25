@@ -89,6 +89,10 @@ public class Fade : MonoBehaviour
 
         // Start fade
         var cam = GameObject.Find("Camera");
+        if (cam == null)
+        {
+            throw new MissingComponentException("Missing game object Camera");
+        }
         var fade = cam.GetComponent<Fade>();
         fade.NextLevelName = nextScene;
         fade.FadeTime = fadeTime;
