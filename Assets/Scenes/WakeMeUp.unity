@@ -633,6 +633,7 @@ MonoBehaviour:
   Head: {fileID: 286846662}
   LeftEyeSpeed: .0900000036
   RightEyeSpeed: .150000006
+  cooldown: 3
 --- !u!4 &1710430759
 Transform:
   m_ObjectHideFlags: 0

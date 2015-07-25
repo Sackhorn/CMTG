@@ -9,6 +9,8 @@ public class WakeMeUp : MonoBehaviour
 	public float LeftEyeSpeed = 0.09f;
 	public float RightEyeSpeed = 0.15f;
 
+    public float cooldown;
+
 	private GameObject _leftEye;
 	private GameObject _rightEye;
 
@@ -36,9 +38,18 @@ public class WakeMeUp : MonoBehaviour
 		_leftEyePos = 0;
 		_rightEyePos = 0;
 
-		// Start timming
-		GameManager.Instance.StartMiniGame(0, 20, -1);
+        StartCoroutine("StartGame");
 	}
+
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(cooldown);
+
+        // Start timming
+        GameManager.Instance.StartMiniGame(0, 20, -1);
+        Head.SetActive(true);
+
+    }
 
 	// Update is called once per frame
 	private void Update()
