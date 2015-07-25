@@ -9,6 +9,7 @@ public class WakeMeUp : MonoBehaviour
     public float MoveDownSpeed = 0.15f;
     public float MoveUpSpeed = 0.3f;
     public float cooldown = 3;
+	public float animtime = 5;
 
 	private GameObject _leftEye;
 	private GameObject _rightEye;
@@ -21,6 +22,7 @@ public class WakeMeUp : MonoBehaviour
 	private Vector3 _rightEyeInitPos;
 
 	private const float _eyesHeight = 7.2f;
+	private bool flag = true;
 
 	// Use this for initialization
 	private void Start()
@@ -50,6 +52,11 @@ public class WakeMeUp : MonoBehaviour
         Budzik.GetComponent<AudioSource>().volume = 0.4f;
 	}
 
+	public IEnumerator GameEng()
+	{
+		yield return new WaitForSeconds(animtime);
+	}
+
 	// Update is called once per frame
 	private void Update()
 	{
@@ -75,6 +82,8 @@ public class WakeMeUp : MonoBehaviour
             Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
             GameManager.Instance.AddScore((1 - Timming.Instance.Position) * 1000.0f);
+			if (flag) StartCoroutine("GameEnd");
+			flag = false;
             GameManager.Instance.NextLevel();
 		}
 		else
