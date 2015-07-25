@@ -39,11 +39,11 @@ public class GameManager : MonoBehaviour
 		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
 		var timming = go.GetComponent<Timming>();
 		timming.TotalTime = seconds;
-		timming.OnFinish = onTimmingEnd;
+		timming.OnFinish = GameOver;
 	}
 
-	private void onTimmingEnd()
+	public void GameOver()
 	{
-        Fade.FadeThisSit("gameKurwaOver", 0.1f);
+		Fade.FadeThisSit("gameKurwaOver", 3.1f);
 	}
 }

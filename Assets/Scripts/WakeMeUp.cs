@@ -37,7 +37,7 @@ public class WakeMeUp : MonoBehaviour
 		_rightEyePos = 0;
 
         // Start timming
-        GameManager.Instance.StartMiniGame(10);
+        GameManager.Instance.StartMiniGame(20);
 	}
 
 	// Update is called once per frame
