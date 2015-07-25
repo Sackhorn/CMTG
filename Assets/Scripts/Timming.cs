@@ -36,8 +36,8 @@ public class Timming : MonoBehaviour
 
         float pos = 1 - Time / TotalTime;
         var res = Screen.currentResolution;
-        gameObject.transform.localScale = new Vector3(pos * pos * res.width * 0.0429f, 1, 1);
-        gameObject.transform.position = new Vector3(0, 0.0227f * res.height, -1);
+        gameObject.transform.localScale = new Vector3(pos * pos * res.width * Camera.current.orthographicSize * 0.00184f, 1, 1);
+        gameObject.transform.position = new Vector3(0, 0.00092f * Camera.current.orthographicSize * res.height, -1);
 
         _material.SetFloat("_pos", 1 - Time * Time / TotalTime);
     }

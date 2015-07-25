@@ -22,3 +22,4 @@ C:\SGJ\Repo\slavic2015\Temp\bin\Debug\UnityEngine.Networking.xml
 C:\SGJ\Repo\slavic2015\Temp\bin\Debug\UnityEngine.Analytics.xml
 C:\SGJ\Repo\slavic2015\obj\Debug\Assembly-CSharp.dll
 C:\SGJ\Repo\slavic2015\obj\Debug\Assembly-CSharp.pdb
+C:\SGJ\Repo\slavic2015\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
