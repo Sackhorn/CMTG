@@ -56,20 +56,13 @@ public class WakeMeUp : MonoBehaviour
 		{
 			_rightEyePos += Time.deltaTime * RightEyeSpeed * (20.4f - _rightEyePos * 2.4f);
 		}
-
-		// cheating
-		if (Input.GetKeyDown(KeyCode.RightAlt))
-		{
-			_rightEyePos = _leftEyePos = 1;
-		}
 		
 		// check game finished event
 		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
 		{
 			// Game won
 			_rightEyePos = 100;
-			//Fade.FadeThisSit("testScene2");
-			Fade.FadeThisSit("pickingUpGirl");
+            GameManager.Instance.NextLevel();
 		}
 		else
 		{
