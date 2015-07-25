@@ -38,17 +38,22 @@ public class WakeMeUp : MonoBehaviour
 		_leftEyePos = 0;
 		_rightEyePos = 0;
 
+<<<<<<< HEAD
         StartCoroutine("StartGame");
+=======
+		// Start timming
+		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
+>>>>>>> 8aba095c6fc83697759654e045730441302864df
 	}
 
     public IEnumerator StartGame()
     {
         yield return new WaitForSeconds(cooldown);
 
-		// Start timming
-		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
+        // Start timming
+        GameManager.Instance.StartMiniGame(0, 20, -1);
         iTween.MoveTo(Head, Vector3.zero, 1f);
-	}
+    }
 
 	// Update is called once per frame
 	private void Update()
@@ -75,7 +80,7 @@ public class WakeMeUp : MonoBehaviour
 			// Game won
 			_rightEyePos = 100;
             GameManager.Instance.AddScore((1 - Timming.Instance.Position) * 1000.0f);
-            GameManager.Instance.NextLevel();
+			GameManager.Instance.NextLevel();
 		}
 		else
 		{
