@@ -45,4 +45,24 @@ public class GameManager : MonoBehaviour
 	{
 		Fade.FadeThisSit("gameKurwaOver", 0.4f);
 	}
+
+    public struct LevelDesc
+    {
+        /// <summary>
+        /// Name of the scene file
+        /// </summary>
+        public string Name;
+
+        /// <summary>
+        /// Tme for level on 1st time
+        /// </summary>
+        public float BaseTime;
+
+        /// <summary>
+        /// Every nex time level is played it's time is multiplied by that value
+        /// </summary>
+        public float TimeMul;
+    }
+
+
 }
