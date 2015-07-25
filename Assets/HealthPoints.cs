@@ -19,8 +19,15 @@ public class HealthPoints : MonoBehaviour
 	private void Start()
 	{
         _source = gameObject.GetComponent<AudioSource>();
-        GameManager.Instance.StartMiniGame(0, _source.clip.length, 0, 0);
+        Timming.Start(_source.clip.length, onFinish);
 	}
+
+    void onFinish()
+    {
+        Debug.LogWarning("ssssssssssssssssss");
+
+        GameManager.Instance.NextLevel();
+    }
 
 	// Update is called once per frame
 	void Update ()

@@ -14,9 +14,14 @@ public class PlayerManager_Bridge : MonoBehaviour
 	// Use this for initialization
     private void Start()
     {
-        GameManager.Instance.StartMiniGame(0, 30.0f, 0, 0);
+        Timming.Start(30.0f, onFinish);
     }
-	
+
+    void onFinish()
+    {
+        GameManager.Instance.GameOver();
+    }
+
 	// Update is called once per frame
 	void Update () {
 		//Mathf.PingPong(Time.time,kupa);

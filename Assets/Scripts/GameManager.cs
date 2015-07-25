@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 		{
 			if (_instance == null)
 			{
-				_instance = Object.FindObjectOfType(typeof(GameManager)) as GameManager;
+				_instance = Object.FindObjectOfType<GameManager>();
 
 				if (_instance == null)
 				{
@@ -43,12 +43,24 @@ public class GameManager : MonoBehaviour
 		get { return _score; }
 	}
 
-	private void OnAwake()
-	{
-		ResetData();
-	}
+    private void Awake()
+    {
+        ResetData();
 
-	private void Update()
+        // get current level
+        for (int i = 0; i < Levels.Length; i++)
+        {
+            if (Levels[i].Name == Application.loadedLevelName)
+            {
+                _currentLevel = i;
+                break;
+            }
+        }
+        
+        Debug.LogWarning("Awake: " + Application.loadedLevelName + ", id: " + _currentLevel);
+    }
+
+    private void Update()
 	{
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
@@ -73,27 +85,10 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Create timming slider
-	/// </summary>
-	/// <param name="secondsToLoose">Amount of seconds to game over (-1 to disable)</param>
-	/// <param name="secondsToWin">Amount of seconds to win a level (-1 to disable)</param>
-	/// <param name="cooldownBefore">Amount of seconds before timer start</param>
-	/// <param name="cooldownAfter">Amount of seconds before timer end</param>
-	public void StartMiniGame(float secondsToLoose, float secondsToWin, float cooldownBefore, float cooldownAfter)
-	{
-		Object prefab = Resources.Load("Timming");
-		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-		var timming = go.GetComponent<Timming>();
-		timming.SecondsToWin = secondsToWin;
-		timming.CooldownAfter = cooldownAfter;
-		timming.CooldownBefore = cooldownBefore;
-		timming.SecondsToLoose = secondsToLoose;
-	}
-
 	public void GameOver()
 	{
 		_currentLevel = -1;
+        Debug.LogWarning("GameOver");
 		Fade.FadeThisSit("gameKurwaOver", 0.4f);
 	}
 
@@ -101,11 +96,13 @@ public class GameManager : MonoBehaviour
 	{
 		_currentLevel++;
 
-        if (_currentLevel >= Levels.Length)
+		if (_currentLevel >= Levels.Length)
 		{
 			_currentLevel = 0;
 			_currentDay++;
 		}
+
+        Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
 
 		Fade.FadeThisSit(Levels[_currentLevel].Name, Levels[_currentLevel].FadeTime);
 	}

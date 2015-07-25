@@ -4,17 +4,42 @@ using System.Collections;
 
 public class Timming : MonoBehaviour
 {
-    private static Timming _currenTimming;
+    private static Timming _timer;
 
     public float Time;
-    public float CooldownBefore;
-    public float CooldownAfter;
-    public float SecondsToLoose;
-    public float SecondsToWin;
+    public float TotalTime;
 
     private Material _material;
+    public Action _onFinish;
 
-    // Use this for initialization
+    /// <summary>
+    /// Create timming slider
+    /// </summary>
+    /// <param name="timerTime">Timer time length in seconds</param>
+    public static void Start(float timerTime, Action onFinish)
+    {
+        if (_timer != null)
+        {
+            Debug.LogWarning("Duplicated timer");
+            Destroy(_timer);
+            _timer = null;
+        }
+
+        var prefab = Resources.Load("Timming");
+        GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+        var timer = go.GetComponent<Timming>();
+        timer.TotalTime = timerTime;
+        timer._onFinish = onFinish;
+    }
+
+    /// <summary>
+    /// Current timmer position in range [0;1]
+    /// </summary>
+    public static float Position
+    {
+        get { return _timer != null ? 1 - _timer.Time / _timer.TotalTime : 0; }
+    }
+
     private void Start()
     {
         Time = 0;
@@ -23,34 +48,29 @@ public class Timming : MonoBehaviour
         _material.SetFloat("_ScreenWidth", Screen.width);
         _material.SetFloat("_ScreenHeight", Screen.height);
 
-        _currenTimming = this;
+        _timer = this;
     }
 
     private void OnDestroy()
     {
-        _currenTimming = null;
+        _timer = null;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         Time += UnityEngine.Time.deltaTime;
-        // Time = 0;
-
-        float realTime = Time - CooldownBefore;
-        if (realTime < 0)
-            realTime = 0;
-
-        if (SecondsToWin > 0 && realTime >= SecondsToWin + CooldownAfter)
-        {
-            GameManager.Instance.NextLevel();
-        }
-        if (SecondsToLoose > 0 && realTime >= SecondsToLoose + CooldownAfter)
-        {
-            GameManager.Instance.GameOver();
-        }
 
         float pos = Position;
+
+        if (pos <= 0.0f)
+        {
+            // End
+            if (_onFinish != null)
+            {
+                _onFinish();
+            }
+            Destroy(gameObject);
+        }
 
         var cam = Camera.main;
         if (cam != null)
@@ -64,36 +84,4 @@ public class Timming : MonoBehaviour
 
         _material.SetFloat("_pos", pos);
     }
-
-    /// <summary>
-    /// Timer position in range [0;1]
-    /// </summary>
-    public float Position
-    {
-        get
-        {
-            float realTime = Time - CooldownBefore;
-            if (realTime < 0)
-                realTime = 0;
-
-            float pos;
-            if ((SecondsToLoose > 0 && Time >= SecondsToLoose) || (SecondsToWin > 0 && Time >= SecondsToWin))
-                pos = 1;
-            else if (SecondsToLoose > 0)
-                pos = 1 - realTime / SecondsToLoose;
-            else
-                pos = 1 - realTime / SecondsToWin;
-            return pos;
-        }
-    }
-
-    public static Timming Instance
-    {
-        get { return _currenTimming; }
-    }
-
-    /*public static bool IsFading
-    {
-        get { return _currenTimming.Position == 0; }
-    }*/
 }
