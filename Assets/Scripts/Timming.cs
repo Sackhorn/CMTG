@@ -4,15 +4,18 @@ using System.Collections;
 
 public class Timming : MonoBehaviour
 {
-    public float Time = 0;
-    public float TotalTime = 30;
-    public Action OnFinish;
+    public float Time;
+    public float SecondsBeforeStart;
+    public float SecondsToLoose;
+    public float SecondsToWin;
 
     private Material _material;
 
     // Use this for initialization
     private void Start()
-    {   
+    {
+        Time = 0;
+
         _material = gameObject.GetComponent<MeshRenderer>().material;
         _material.SetFloat("_ScreenWidth", Screen.width);
         _material.SetFloat("_ScreenHeight", Screen.height);
@@ -21,21 +24,32 @@ public class Timming : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if(Time >= TotalTime)
+        if ((SecondsToLoose > 0 && Time >= SecondsToLoose) || (SecondsToWin > 0 && Time >= SecondsToWin))
             return;
         
-       Time += UnityEngine.Time.deltaTime;
+       //Time += UnityEngine.Time.deltaTime;
+        Time = 0;
 
-        if (Time >= TotalTime)
+        float realTime = Time - SecondsBeforeStart;
+        if (realTime < 0)
+            realTime = 0;
+
+        if (SecondsToWin > 0 && realTime >= SecondsToWin)
         {
-            if (OnFinish != null)
-            {
-                OnFinish();
-            }
+            GameManager.Instance.NextLevel();
+        }
+        if (SecondsToLoose > 0 && realTime >= SecondsToLoose)
+        {
+            GameManager.Instance.GameOver();
         }
 
-        float pos = 1 - Time / TotalTime;
-        var cam = Camera.current;
+        float pos;
+        if(SecondsToLoose > 0)
+            pos = 1 - realTime / SecondsToLoose;
+        else
+            pos = 1 - realTime / SecondsToWin;
+
+        var cam = Camera.main;
         if (cam != null)
         {
             var res = Screen.currentResolution;
@@ -44,6 +58,6 @@ public class Timming : MonoBehaviour
             gameObject.transform.position = new Vector3(0, 0.00091f * h * res.height, -1);
         }
 
-        _material.SetFloat("_pos", 1 - Time * Time / TotalTime);
+        _material.SetFloat("_pos", 1 - Time * Time / realTime);
     }
 }
