@@ -104,7 +104,7 @@ GameObject:
   - 114: {fileID: 265110584}
   - 114: {fileID: 265110583}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -291,7 +291,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -278.199982
+      value: -369
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -549,7 +549,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -278.199982
+      value: -369
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.y

@@ -24,7 +24,7 @@ public class Timming : MonoBehaviour
         if(Time >= TotalTime)
             return;
         
-        Time += UnityEngine.Time.deltaTime;
+       Time += UnityEngine.Time.deltaTime;
 
         if (Time >= TotalTime)
         {
@@ -35,8 +35,9 @@ public class Timming : MonoBehaviour
         }
 
         float pos = 1 - Time / TotalTime;
-        gameObject.transform.localScale = new Vector3(pos * pos * Screen.width * 0.0791f, 1, 1);
-        gameObject.transform.position = new Vector3(0, 0.00158f * Camera.main.orthographicSize * Screen.height, -1);
+        var res = Screen.currentResolution;
+        gameObject.transform.localScale = new Vector3(pos * pos * res.width * 0.0429f, 1, 1);
+        gameObject.transform.position = new Vector3(0, 0.0227f * res.height, -1);
 
         _material.SetFloat("_pos", 1 - Time * Time / TotalTime);
     }

@@ -7,13 +7,13 @@ public class Fade : MonoBehaviour
 
     private Material ccMaterial;
     private float _fade;
-	private string NextLevelName;
+    private string NextLevelName;
     private float FadeTime;
-
-	// Use this for initialization
+    
+    // Use this for initialization
     private void Start()
-	{
-		_fade = 0.0f;
+    {
+        _fade = 0.0f;
         NextLevelName = null;
 
         ccMaterial = CheckShaderAndCreateMaterial(Shader, ccMaterial);
@@ -44,31 +44,34 @@ public class Fade : MonoBehaviour
                 return m2Create;
             else return null;
         }
-	}
-	
+    }
+
     private void Update()
     {
         if (NextLevelName != null)
-	{
-		_fade += Time.deltaTime;
+        {
+            _fade += Time.deltaTime;
 
-		if (_fade >= FadeTime)
-		{
+            if (_fade >= FadeTime)
+            {
                 var toLoad = NextLevelName;
                 NextLevelName = null;
+
+                _fade = 1.0f;
+                Camera.main.cullingMask = 0;
+
 #if UNITY_EDITOR
-                Debug.LogWarning("Loading: " + toLoad);
+                //Debug.LogWarning("Loading: " + toLoad);
 #endif
                 Application.LoadLevel(toLoad);
-                _fade = 1.0f;
             }
-		}
+        }
 
         ccMaterial.SetFloat("_pos", _fade / FadeTime);
-	}
+    }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
-	{
+    {
         if (_fade == 0)
             Graphics.Blit(source, destination);
         else
@@ -76,10 +79,18 @@ public class Fade : MonoBehaviour
     }
 
     public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
-		{
+    {
+        // Hide UI
+        var ui = GameObject.Find("UI");
+        if(ui != null)
+        {
+            ui.SetActive(false);
+        }
+
+        // Start fade
         var cam = GameObject.Find("Camera");
         var fade = cam.GetComponent<Fade>();
-			fade.NextLevelName = nextScene;
+        fade.NextLevelName = nextScene;
         fade.FadeTime = fadeTime;
-	}
+    }
 }
