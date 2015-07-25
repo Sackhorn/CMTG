@@ -45,10 +45,9 @@ public class WakeMeUp : MonoBehaviour
     {
         yield return new WaitForSeconds(cooldown);
 
-        // Start timming
-        GameManager.Instance.StartMiniGame(0, 20, -1);
-        iTween.MoveTo(Head, Vector3.zero, 1f);
-    }
+		// Start timming
+		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
+	}
 
 	// Update is called once per frame
 	private void Update()
@@ -74,6 +73,7 @@ public class WakeMeUp : MonoBehaviour
 		{
 			// Game won
 			_rightEyePos = 100;
+            GameManager.Instance.AddScore((1 - Timming.Instance.Position) * 1000.0f);
             GameManager.Instance.NextLevel();
 		}
 		else

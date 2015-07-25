@@ -9,7 +9,7 @@ public class GameOverLogic : MonoBehaviour
 	{
 		//gameObject.GetComponent<AudioSource>().Play();
 
-		GameObject.Find("UI").transform.FindChild("Info").GetComponent<Text>().text = "CLICKS: " + GameManager.Instance.Clicks;
+		GameObject.Find("UI").transform.FindChild("Info").GetComponent<Text>().text = "SCORE: " + GameManager.Instance.Score + "\nCLICKS: " + GameManager.Instance.Clicks;
 	}
 	
 	// Update is called once per frame

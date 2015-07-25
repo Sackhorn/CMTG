@@ -4,8 +4,11 @@ using System.Collections;
 
 public class Timming : MonoBehaviour
 {
+    private static Timming _currenTimming;
+
     public float Time;
-    public float SecondsBeforeStart;
+    public float CooldownBefore;
+    public float CooldownAfter;
     public float SecondsToLoose;
     public float SecondsToWin;
 
@@ -19,36 +22,35 @@ public class Timming : MonoBehaviour
         _material = gameObject.GetComponent<MeshRenderer>().material;
         _material.SetFloat("_ScreenWidth", Screen.width);
         _material.SetFloat("_ScreenHeight", Screen.height);
+
+        _currenTimming = this;
+    }
+
+    private void OnDestroy()
+    {
+        _currenTimming = null;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if ((SecondsToLoose > 0 && Time >= SecondsToLoose) || (SecondsToWin > 0 && Time >= SecondsToWin))
-            return;
-        
-       Time += UnityEngine.Time.deltaTime;
-       // Time = 0;
+        Time += UnityEngine.Time.deltaTime;
+        // Time = 0;
 
-        float realTime = Time - SecondsBeforeStart;
+        float realTime = Time - CooldownBefore;
         if (realTime < 0)
             realTime = 0;
 
-        if (SecondsToWin > 0 && realTime >= SecondsToWin)
+        if (SecondsToWin > 0 && realTime >= SecondsToWin + CooldownAfter)
         {
             GameManager.Instance.NextLevel();
         }
-        if (SecondsToLoose > 0 && realTime >= SecondsToLoose)
+        if (SecondsToLoose > 0 && realTime >= SecondsToLoose + CooldownAfter)
         {
             GameManager.Instance.GameOver();
         }
 
-        float pos;
-        if(SecondsToLoose > 0)
-            pos = 1 - realTime / SecondsToLoose;
-        else
-            pos = 1 - realTime / SecondsToWin;
-        //pos = 1;
+        float pos = Position;
 
         var cam = Camera.main;
         if (cam != null)
@@ -61,5 +63,32 @@ public class Timming : MonoBehaviour
         }
 
         _material.SetFloat("_pos", pos);
+    }
+
+    /// <summary>
+    /// Timer position in range [0;1]
+    /// </summary>
+    public float Position
+    {
+        get
+        {
+            float realTime = Time - CooldownBefore;
+            if (realTime < 0)
+                realTime = 0;
+
+            float pos;
+            if ((SecondsToLoose > 0 && Time >= SecondsToLoose) || (SecondsToWin > 0 && Time >= SecondsToWin))
+                pos = 1;
+            else if (SecondsToLoose > 0)
+                pos = 1 - realTime / SecondsToLoose;
+            else
+                pos = 1 - realTime / SecondsToWin;
+            return pos;
+        }
+    }
+
+    public static Timming Instance
+    {
+        get { return _currenTimming; }
     }
 }
