@@ -5,7 +5,7 @@ public class WakeMeUp : MonoBehaviour
 {
 	public GameObject Head;
     public GameObject Budzik;
-	
+
     public float MoveDownSpeed = 0.15f;
     public float MoveUpSpeed = 0.3f;
     public float cooldown = 3;
@@ -48,7 +48,7 @@ public class WakeMeUp : MonoBehaviour
 		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
         iTween.MoveTo(Head, Vector3.zero, 1.0f);
         Budzik.GetComponent<AudioSource>().volume = 0.4f;
-    }
+	}
 
 	// Update is called once per frame
 	private void Update()

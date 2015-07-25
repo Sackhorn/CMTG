@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - leftBorder
+  - rightBorder
+  - stroke
+  - LeftA
+  - RightA
+  - UpA
+  - DownA
+  - border
+  - Obstacle
+  - Papierki_Manager
   layers:
   - Default
   - TransparentFX
