@@ -3,13 +3,12 @@ using System.Collections;
 
 public class WakeMeUp : MonoBehaviour
 {
-	//public GameObject Canvas;
 	public GameObject Head;
+    public GameObject Budzik;
 
-	public float LeftEyeSpeed = 0.09f;
-	public float RightEyeSpeed = 0.15f;
-
-    public float cooldown;
+    public float MoveDownSpeed = 0.15f;
+    public float MoveUpSpeed = 0.3f;
+    public float cooldown = 3;
 
 	private GameObject _leftEye;
 	private GameObject _rightEye;
@@ -47,13 +46,13 @@ public class WakeMeUp : MonoBehaviour
 
 		// Start timming
 		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
+        iTween.MoveTo(Head, Vector3.zero, 1.0f);
+        Budzik.GetComponent<AudioSource>().volume = 0.4f;
 	}
 
 	// Update is called once per frame
 	private void Update()
 	{
-
-      
 		// check if update more
 		if(_rightEyePos == 100)
 			return;
@@ -61,17 +60,19 @@ public class WakeMeUp : MonoBehaviour
 		// check input
 		if (Input.GetMouseButtonDown(0))
 		{
-			_leftEyePos += Time.deltaTime * LeftEyeSpeed * (21 - _leftEyePos * 2.8f);
+            _leftEyePos += Time.deltaTime * MoveUpSpeed * (15 - _leftEyePos * 5);
 		}
 		if (Input.GetMouseButtonDown(1))
 		{
-			_rightEyePos += Time.deltaTime * RightEyeSpeed * (20.4f - _rightEyePos * 2.4f);
+            _rightEyePos += Time.deltaTime * MoveUpSpeed * (15 - _rightEyePos * 5);
 		}
 		
 		// check game finished event
-		if (_rightEyePos >= 1.0f && _leftEyePos >= 1.0f)
+	    const float eyeIsUpWhen = 0.98f;
+        if (_rightEyePos >= eyeIsUpWhen && _leftEyePos >= eyeIsUpWhen)
 		{
 			// Game won
+            Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
             GameManager.Instance.AddScore((1 - Timming.Instance.Position) * 1000.0f);
             GameManager.Instance.NextLevel();
@@ -79,10 +80,8 @@ public class WakeMeUp : MonoBehaviour
 		else
 		{
 			// move eyes down
-			if (_leftEyePos < 1.0f)
-				_leftEyePos -= LeftEyeSpeed * Time.deltaTime;
-			if (_rightEyePos < 1.0f)
-				_rightEyePos -= RightEyeSpeed * Time.deltaTime;
+            _leftEyePos -= MoveDownSpeed * Time.deltaTime;
+            _rightEyePos -= MoveDownSpeed * Time.deltaTime;
 
 			// clamp eyes
 			_leftEyePos = Mathf.Clamp01(_leftEyePos);

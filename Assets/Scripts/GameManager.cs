@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
 	private int _clicks;
 	private int _score;
-	private int _currentLevel;
+	private int _currentLevel = -1;
 	private int _currentDay;
 
 	public static bool isActive
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 		get { return _score; }
 	}
 
-	private void Start()
+	private void OnAwake()
 	{
 		ResetData();
 	}
@@ -100,7 +100,8 @@ public class GameManager : MonoBehaviour
 	public void NextLevel()
 	{
 		_currentLevel++;
-		if (_currentLevel >= Levels.Length)
+
+        if (_currentLevel >= Levels.Length)
 		{
 			_currentLevel = 0;
 			_currentDay++;
@@ -151,7 +152,7 @@ public class GameManager : MonoBehaviour
 		/// <summary>
 		/// Configuration fir the scene (custom for every one)
 		/// </summary>
-		public float[] Config;
+		public object[] Config;
 	}
 
 	public LevelDesc[] Levels =
@@ -160,7 +161,16 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "WakeMeUp",
 			FadeTime = 1.2f,
-			Config = new []
+			Config = new object[]
+			{
+				0.0f
+			}
+		},
+		new LevelDesc()
+		{
+			Name = "Korpo_scena",
+			FadeTime = 0.2f,
+			Config = new object[]
 			{
 				0.0f
 			}
@@ -169,7 +179,7 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "pickingUpGirl",
 			FadeTime = 0.4f,
-			Config = new []
+			Config = new object[]
 			{
 				0.0f
 			}
@@ -178,7 +188,7 @@ public class GameManager : MonoBehaviour
 		{
 			Name = "Bridge",
 			FadeTime = 0.4f,
-			Config = new []
+			Config = new object[]
 			{
 				0.0f
 			}
