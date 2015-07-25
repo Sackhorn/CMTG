@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs">
+    <Files>
+      <File FileName="Assets\Papierki_scene\Skrypty\GoodPapierek.cs" Line="8" Column="44" />
+      <File FileName="Assets\Papierki_scene\Skrypty\BadPapierek.cs" Line="23" Column="3" />
+      <File FileName="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs" Line="105" Column="24" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
