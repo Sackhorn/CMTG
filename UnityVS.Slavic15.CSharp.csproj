@@ -68,6 +68,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnityVS.Slavic15.CSharp.Plugins.csproj">
+      <Project>{DB28576E-337F-D20F-C5CD-C30D69D8EC8B}</Project>
+      <Name>UnityVS.Slavic15.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\DestroyerScript.cs" />
     <Compile Include="Assets\HealthPoints.cs" />
     <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
@@ -86,6 +92,7 @@
     <Compile Include="Assets\Scripts\WakeMeUp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
     <None Include="Assets\Shaders\S_CameraFade.shader" />
     <None Include="Assets\Shaders\S_PixelFade.shader" />
     <None Include="Assets\Shaders\S_Timming.shader" />

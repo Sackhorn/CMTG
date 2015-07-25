@@ -171,6 +171,7 @@ GameObject:
   - 224: {fileID: 1544152205}
   - 222: {fileID: 1544152204}
   - 114: {fileID: 1544152203}
+  - 95: {fileID: 1544152206}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 8f72230db99da1e40b8aa63d28eb8ebd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95d37ad1b38bbc041991f69aae314a21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -222,6 +223,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: .5, y: .5}
+--- !u!95 &1544152206
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1544152202}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c35d8db35c6e3684bb3780f9a00de9b9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1715838678
 GameObject:
   m_ObjectHideFlags: 0

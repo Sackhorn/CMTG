@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEditor;
 
 [RequireComponent(typeof(Camera))]
 public class Fade : MonoBehaviour
@@ -58,7 +56,9 @@ public class Fade : MonoBehaviour
 		{
                 var toLoad = NextLevelName;
                 NextLevelName = null;
+#if UNITY_EDITOR
                 Debug.LogWarning("Loading: " + toLoad);
+#endif
                 Application.LoadLevel(toLoad);
                 _fade = 1.0f;
             }

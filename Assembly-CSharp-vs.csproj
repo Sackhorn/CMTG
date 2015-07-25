@@ -46,9 +46,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
      <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\GoodPapierek.cs" />
      <Compile Include="Assets\Papierki_scene\Skrypty\Papierek_Manager_Script.cs" />
+=======
+     <Compile Include="Assets\Scripts\Fade.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\MenuLogic.cs" />
+     <Compile Include="Assets\Scripts\SpriteFit2Screen.cs" />
+     <Compile Include="Assets\Scripts\Timming.cs" />
+     <Compile Include="Assets\Scripts\UIFit2Screen.cs" />
+     <Compile Include="Assets\Scripts\WakeMeUp.cs" />
+     <None Include="Assets\Shaders\S_PixelFade.shader" />
+     <None Include="Assets\Shaders\S_Timming.shader" />
+     <None Include="Assets\Shaders\S_CameraFade.shader" />
+>>>>>>> dbec9f7bc7abc505190eeabb42b1d841b556cfed
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
