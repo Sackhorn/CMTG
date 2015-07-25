@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
     <Compile Include="Assets\Scripts\CollideCheck.cs" />
     <Compile Include="Assets\Scripts\Fade.cs" />
+    <Compile Include="Assets\Scripts\FadeBlackToTransparent.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameOverLogic.cs" />
     <Compile Include="Assets\Scripts\MenuLogic.cs" />
