@@ -68,16 +68,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DestroyerScript.cs" />
+    <Compile Include="Assets\HealthPoints.cs" />
+    <Compile Include="Assets\Scripts\ArrowMovement.cs" />
     <Compile Include="Assets\Scripts\BarManager.cs" />
     <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
+    <Compile Include="Assets\Scripts\CollideCheck.cs" />
     <Compile Include="Assets\Scripts\Fade.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
+    <Compile Include="Assets\Scripts\SpawnScript.cs" />
     <Compile Include="Assets\Scripts\StrokeManager.cs" />
+    <Compile Include="Assets\Scripts\Timming.cs" />
     <Compile Include="Assets\Scripts\WakeMeUp.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\S_CameraFade.shader" />
     <None Include="Assets\Shaders\S_PixelFade.shader" />
+    <None Include="Assets\Shaders\S_Timming.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
