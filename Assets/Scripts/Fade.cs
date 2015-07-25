@@ -56,11 +56,14 @@ public class Fade : MonoBehaviour
             {
                 var toLoad = NextLevelName;
                 NextLevelName = null;
+
+                _fade = 1.0f;
+                Camera.main.cullingMask = 0;
+
 #if UNITY_EDITOR
-                Debug.LogWarning("Loading: " + toLoad);
+                //Debug.LogWarning("Loading: " + toLoad);
 #endif
                 Application.LoadLevel(toLoad);
-                _fade = 1.0f;
             }
         }
 
@@ -77,6 +80,14 @@ public class Fade : MonoBehaviour
 
     public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
     {
+        // Hide UI
+        var ui = GameObject.Find("UI");
+        if(ui != null)
+        {
+            ui.SetActive(false);
+        }
+
+        // Start fade
         var cam = GameObject.Find("Camera");
         var fade = cam.GetComponent<Fade>();
         fade.NextLevelName = nextScene;

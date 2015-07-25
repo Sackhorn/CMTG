@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Fade.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\GameOverLogic.cs" />
      <Compile Include="Assets\Scripts\MenuLogic.cs" />
      <Compile Include="Assets\Scripts\SpriteFit2Screen.cs" />
      <Compile Include="Assets\Scripts\Timming.cs" />
