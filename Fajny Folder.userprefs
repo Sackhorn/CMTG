@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Papierki_scene\Skrypty\Player_Script.cs">
+    <Files>
+      <File FileName="Assets\Papierki_scene\Skrypty\Player_Script.cs" Line="6" Column="37" />
+      <File FileName="Assets\Papierki_scene\Skrypty\CameraScript.cs" Line="9" Column="93" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
