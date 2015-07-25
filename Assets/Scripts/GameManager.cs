@@ -168,6 +168,15 @@ public class GameManager : MonoBehaviour
 		},
 		new LevelDesc()
 		{
+			Name = "Korpo_scena",
+			FadeTime = 0.2f,
+			Config = new object[]
+			{
+				0.0f
+			}
+		},
+		new LevelDesc()
+		{
 			Name = "pickingUpGirl",
 			FadeTime = 0.4f,
 			Config = new object[]
