@@ -6,14 +6,14 @@ Properties{
 		_Pixelozowe("Pixelozowe", 2D) = "black" {}
 		_MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
 		_ColorRamp("Cutout (A)", 2D) = "white" {}
-		_pos("Alpha cutoff", Range(0, 1)) = 1
+		_pos("_pos", Range(0, 1)) = 0
 }
 SubShader{
 		Tags{ "Queue" = "Transparent" "IgnoreProjector" = "True" }
 		LOD 200
 		Lighting Off
 		Cull Back
-		Blend DstColor Zero
+		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{

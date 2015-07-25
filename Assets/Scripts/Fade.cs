@@ -1,49 +1,85 @@
-﻿//using UnityEngine;
-//using System.Collections;
-//using UnityEditor;
+﻿using UnityEngine;
+using System.Collections;
+using UnityEditor;
 
-//public class Fade : MonoBehaviour
-//{
-//	private float _fade;
+[RequireComponent(typeof(Camera))]
+public class Fade : MonoBehaviour
+{
+    public Shader Shader = null;
 
-//	private const float FadeTime = 0.4f;
+    private Material ccMaterial;
+    private float _fade;
+	private string NextLevelName;
+    private float FadeTime;
 
-//	private string NextLevelName;
-//	private Material _material;
+	// Use this for initialization
+    private void Start()
+	{
+		_fade = 0.0f;
+        NextLevelName = null;
 
-//	// Use this for initialization
-//	void Start ()
-//	{
-//		_fade = 0.0f;
+        ccMaterial = CheckShaderAndCreateMaterial(Shader, ccMaterial);
+    }
 
-//		_material = gameObject.GetComponent<MeshRenderer>().material;
-//		_material.SetFloat("_ScreenWidth", Screen.width);
-//		_material.SetFloat("_ScreenHeight", Screen.height);
-//	}
+    protected Material CheckShaderAndCreateMaterial(Shader s, Material m2Create)
+    {
+        if (!s)
+        {
+            Debug.Log("Missing shader in " + ToString());
+            enabled = false;
+            return null;
+        }
+
+        if (s.isSupported && m2Create && m2Create.shader == s)
+            return m2Create;
+
+        if (!s.isSupported)
+        {
+            Debug.Log("The shader " + s.ToString() + " on effect " + ToString() + " is not supported on this platform!");
+            return null;
+        }
+        else
+        {
+            m2Create = new Material(s);
+            m2Create.hideFlags = HideFlags.DontSave;
+            if (m2Create)
+                return m2Create;
+            else return null;
+        }
+	}
 	
-//	// Update is called once per frame
-//	void Update ()
-//	{
-//		_fade += Time.deltaTime;
+    private void Update()
+    {
+        if (NextLevelName != null)
+	{
+		_fade += Time.deltaTime;
 
-//        _material.SetFloat("_pos", 1 - _fade / FadeTime);
+		if (_fade >= FadeTime)
+		{
+                var toLoad = NextLevelName;
+                NextLevelName = null;
+                Debug.LogWarning("Loading: " + toLoad);
+                Application.LoadLevel(toLoad);
+                _fade = 1.0f;
+            }
+		}
 
-//		if (_fade >= FadeTime)
-//		{
-//			Application.LoadLevel(NextLevelName);
-//		}
-//	}
+        ccMaterial.SetFloat("_pos", _fade / FadeTime);
+	}
 
-//	public static void FadeThisSit(string nextScene)
-//	{
-//		var fade = Object.FindObjectOfType(typeof(Fade)) as Fade;
+    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+	{
+        if (_fade == 0)
+            Graphics.Blit(source, destination);
+        else
+            Graphics.Blit(source, destination, ccMaterial);
+    }
 
-//		if (fade == null)
-//		{
-//			Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefarbs/Fade.prefab", typeof(GameObject));
-//			GameObject go = Instantiate(prefab, new Vector3(0,0,-1.0f), Quaternion.identity) as GameObject;
-//			fade = go.GetComponent<Fade>();
-//			fade.NextLevelName = nextScene;
-//		}
-//	}
-//}
+    public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
+		{
+        var cam = GameObject.Find("Camera");
+        var fade = cam.GetComponent<Fade>();
+			fade.NextLevelName = nextScene;
+        fade.FadeTime = fadeTime;
+	}
+}

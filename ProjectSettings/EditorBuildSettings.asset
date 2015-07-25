@@ -6,4 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Bridge.unity
+    path: Assets/Scenes/WakeMeUp.unity
+  - enabled: 1
+    path: Assets/Scenes/testScene2.unity
+  - enabled: 1
+    path: Assets/Scenes/gameKurwaOver.unity
