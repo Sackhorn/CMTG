@@ -60,12 +60,8 @@ public class Fade : MonoBehaviour
                 NextLevelName = null;
                 Debug.LogWarning("Loading: " + toLoad);
                 Application.LoadLevel(toLoad);
-                _fade = 0;
+                _fade = 1.0f;
             }
-        }
-        else
-        {
-            _fade = 0.0f;
         }
 
         ccMaterial.SetFloat("_pos", _fade / FadeTime);

@@ -44,6 +44,6 @@ public class GameManager : MonoBehaviour
 
 	public void GameOver()
 	{
-		Fade.FadeThisSit("gameKurwaOver", 3.1f);
+		Fade.FadeThisSit("gameKurwaOver", 0.4f);
 	}
 }
