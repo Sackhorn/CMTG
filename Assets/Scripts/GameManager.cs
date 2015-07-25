@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
-    static public bool isActive
-    {
-        get
-        {
-            return _instance != null;
-        }
-    }
+
+	static public bool isActive
+	{
+		get
+		{
+			return _instance != null;
+		}
+	}
 
 	public static GameManager Instance
 	{
@@ -30,4 +30,39 @@ public class GameManager : MonoBehaviour
 			return _instance;
 		}
 	}
+
+	public void StartMiniGame(float seconds)
+	{
+		//Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefarbs/Timming.prefab", typeof(GameObject));
+	    Object prefab = Resources.Load("Timming");
+		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
+		var timming = go.GetComponent<Timming>();
+		timming.TotalTime = seconds;
+		timming.OnFinish = GameOver;
+	}
+
+	public void GameOver()
+	{
+		Fade.FadeThisSit("gameKurwaOver", 0.4f);
+	}
+
+    public struct LevelDesc
+    {
+        /// <summary>
+        /// Name of the scene file
+        /// </summary>
+        public string Name;
+
+        /// <summary>
+        /// Tme for level on 1st time
+        /// </summary>
+        public float BaseTime;
+
+        /// <summary>
+        /// Every nex time level is played it's time is multiplied by that value
+        /// </summary>
+        public float TimeMul;
+    }
+
+
 }
