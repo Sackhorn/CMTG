@@ -1,26 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HealthPoints : MonoBehaviour {
-
-	static public int HP = 50;
-	// Use this for initialization
-	void Start () {
-	
-	}
+public class HealthPoints : MonoBehaviour
+{
+	public int HP = 5;
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		Debug.Log(HP);
 		if(HP <= 0)
 		{
 			//Debug.Log("Dead");
+			GameManager.Instance.GameOver();
 		}
 	}
-
-	static public void decreaseHP()
+	
+	public static void decreaseHP()
 	{
-		HP -= 10;
+		GameObject.Find("ScoreManager").GetComponent<HealthPoints>().HP--;
 	}
-
 }

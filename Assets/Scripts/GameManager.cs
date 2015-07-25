@@ -4,6 +4,8 @@ public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
 
+	private int _clicks;
+
 	static public bool isActive
 	{
 		get
@@ -31,10 +33,23 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	private void Start()
+	{
+		ResetData();
+	}
+
+	private void Update()
+	{
+		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+		{
+			_clicks++;
+		}
+	}
+
 	public void StartMiniGame(float seconds)
 	{
 		//Object prefab = AssetDatabase.LoadAssetAtPath("Assets/Prefarbs/Timming.prefab", typeof(GameObject));
-	    Object prefab = Resources.Load("Timming");
+		Object prefab = Resources.Load("Timming");
 		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
 		var timming = go.GetComponent<Timming>();
 		timming.TotalTime = seconds;
@@ -46,23 +61,32 @@ public class GameManager : MonoBehaviour
 		Fade.FadeThisSit("gameKurwaOver", 0.4f);
 	}
 
-    public struct LevelDesc
-    {
-        /// <summary>
-        /// Name of the scene file
-        /// </summary>
-        public string Name;
+	public void ResetData()
+	{
+		_clicks = 0;
+	}
 
-        /// <summary>
-        /// Tme for level on 1st time
-        /// </summary>
-        public float BaseTime;
+	public struct LevelDesc
+	{
+		/// <summary>
+		/// Name of the scene file
+		/// </summary>
+		public string Name;
 
-        /// <summary>
-        /// Every nex time level is played it's time is multiplied by that value
-        /// </summary>
-        public float TimeMul;
-    }
+		/// <summary>
+		/// Tme for level on 1st time
+		/// </summary>
+		public float BaseTime;
 
+		/// <summary>
+		/// Every nex time level is played it's time is multiplied by that value
+		/// </summary>
+		public float TimeMul;
+	}
+
+	public int Clicks
+	{
+		get { return _clicks; }
+	}
 
 }

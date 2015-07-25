@@ -107,6 +107,10 @@ Material:
         second: .5
       data:
         first:
+          name: _pos
+        second: 0
+      data:
+        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -149,10 +153,6 @@ Material:
         first:
           name: _ScreenHeight
         second: 720
-      data:
-        first:
-          name: _pos
-        second: 0
     m_Colors:
       data:
         first:
@@ -165,11 +165,11 @@ Material:
       data:
         first:
           name: _Color1
-        second: {r: .203921571, g: .596078455, b: .858823538, a: 1}
+        second: {r: .905882359, g: .298039228, b: .235294119, a: 1}
       data:
         first:
           name: _Color2
-        second: {r: .160784319, g: .501960814, b: .725490212, a: 1}
+        second: {r: .752941191, g: .223529413, b: .168627456, a: 1}
       data:
         first:
           name: _Color3

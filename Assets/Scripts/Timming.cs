@@ -35,9 +35,14 @@ public class Timming : MonoBehaviour
         }
 
         float pos = 1 - Time / TotalTime;
-        var res = Screen.currentResolution;
-        gameObject.transform.localScale = new Vector3(pos * pos * res.width * Camera.current.orthographicSize * 0.00184f, 1, 1);
-        gameObject.transform.position = new Vector3(0, 0.00092f * Camera.current.orthographicSize * res.height, -1);
+        var cam = Camera.current;
+        if (cam != null)
+        {
+            var res = Screen.currentResolution;
+            float h = cam.orthographicSize;
+            gameObject.transform.localScale = new Vector3(pos * pos * res.width * h * 0.00184f, h / 30, 1);
+            gameObject.transform.position = new Vector3(0, 0.00091f * h * res.height, -1);
+        }
 
         _material.SetFloat("_pos", 1 - Time * Time / TotalTime);
     }

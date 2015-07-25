@@ -11,6 +11,9 @@ TagManager:
   - RightA
   - UpA
   - DownA
+  - border
+  - Obstacle
+  - Papierki_Manager
   layers:
   - Default
   - TransparentFX
