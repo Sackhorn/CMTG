@@ -10,6 +10,7 @@ public class CollideCheck : MonoBehaviour
     private bool _upA = false;
     private bool _downA = false;
     private GameObject obj;
+	public GameObject dancer;
 
     private void Update()
     {
@@ -46,6 +47,8 @@ public class CollideCheck : MonoBehaviour
     {
         GameManager.Instance.AddScore(10);
         Destroy(obj);
+		//DancerMovement.move();
+		GameObject.Find("Dancer_romancer").GetComponent<DancerMovement>().move();
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
