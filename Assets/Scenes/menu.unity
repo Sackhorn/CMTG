@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34dbf9d6f0b380549bf208b021eaf4f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  factor: 1.10000002
 --- !u!1001 &1138967302
 Prefab:
   m_ObjectHideFlags: 0
@@ -291,7 +292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -369
+      value: -419.400024
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.y
@@ -549,7 +550,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: -369
+      value: -419.400024
       objectReference: {fileID: 0}
     - target: {fileID: 22417266, guid: 4b238711e5d0682469f698e36205e6a2, type: 2}
       propertyPath: m_AnchoredPosition.y
