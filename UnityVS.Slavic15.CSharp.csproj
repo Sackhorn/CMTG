@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\ChmurkaManager.cs" />
     <Compile Include="Assets\Scripts\Fade.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
     <Compile Include="Assets\Scripts\StrokeManager.cs" />
     <Compile Include="Assets\Scripts\WakeMeUp.cs" />
   </ItemGroup>

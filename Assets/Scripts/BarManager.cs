@@ -5,21 +5,24 @@ public class BarManager : MonoBehaviour
 {
 
     public Transform stroke;
-    public int secondsToChange;
+    public PlayerManager_Bridge playerManager;
+    public float secondsToChange;
+    public float secondsToStart;
     public int minTime;
     public int maxTime;
     public float speed;
     public float widithFactor;
+    
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D _rigidbody2D;
     private SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start()
     {
-        rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
+        _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        secondsToChange = 2;
+        secondsToChange = secondsToStart;
         StartCoroutine("ChangeDirection");
         gameObject.GetComponent<Transform>().localScale = new Vector3(widithFactor, 1, 1);
   
@@ -53,7 +56,11 @@ public class BarManager : MonoBehaviour
         if (collision.gameObject.tag == "leftBorder" || collision.gameObject.tag == "rightBorder")
         {
             speed = -speed;
-            rigidbody2D.velocity = new Vector2(speed, 0f);
+            _rigidbody2D.velocity = new Vector2(speed, 0f);
+        }
+        else if (collision.gameObject.tag == "stroke")
+        {
+            playerManager.StopFalling();
         }
     }
 
@@ -62,7 +69,7 @@ public class BarManager : MonoBehaviour
     public void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "stroke")
-        Debug.Log("Przegrałeś");
+            playerManager.StartFalling();
     }
 
     IEnumerator ChangeDirection()
@@ -73,7 +80,7 @@ public class BarManager : MonoBehaviour
         secondsToChange = Random.Range(minTime, maxTime);
         speed = -speed;
 
-        rigidbody2D.velocity = new Vector2(speed, 0f);
+        _rigidbody2D.velocity = new Vector2(speed, 0f);
 
         StartCoroutine("ChangeDirection");
 
