@@ -58,8 +58,8 @@ public class BarManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "leftBorder" || collision.gameObject.tag == "rightBorder")
         {
-            //speed = -speed;
-            //_rigidbody2D.velocity = new Vector2(speed, 0f);
+            speed = -speed;
+            _rigidbody2D.velocity = new Vector2(speed, 0f);
         }
         else if (collision.gameObject.tag == "stroke")
         {
@@ -81,9 +81,9 @@ public class BarManager : MonoBehaviour
         
         yield return new WaitForSeconds(secondsToChange);
         secondsToChange = Random.Range(minTime, maxTime);
-       // speed = -speed;
+        speed = -speed;
 
-        //_rigidbody2D.velocity = new Vector2(speed, 0f);
+        _rigidbody2D.velocity = new Vector2(speed, 0f);
 
         StartCoroutine("ChangeDirection");
 
