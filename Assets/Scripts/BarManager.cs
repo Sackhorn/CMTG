@@ -32,6 +32,8 @@ public class BarManager : MonoBehaviour
 
     void Update()
     {
+        if (!playerManager.IsRunning) return;
+
         float green;
         float blue;
         float difference = Mathf.Abs(gameObject.transform.position.x - stroke.position.x);
@@ -67,6 +69,9 @@ public class BarManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        //if (!playerManager.IsRunning)   return;
+
+
         if (collision.gameObject.tag == "leftBorder" || collision.gameObject.tag == "rightBorder")
         {
             speed = -speed;
@@ -88,9 +93,10 @@ public class BarManager : MonoBehaviour
 
     IEnumerator ChangeDirection()
     {
-
+        //if (!playerManager.IsRunning) yield return new WaitForSeconds(0.01f);
         
         yield return new WaitForSeconds(secondsToChange);
+
         secondsToChange = Random.Range(minTime, maxTime);
         speed = -speed;
 
