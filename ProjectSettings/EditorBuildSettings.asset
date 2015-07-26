@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/gameKurwaOver.unity
   - enabled: 1
     path: Assets/Papierki_scene/Korpo_scena.unity
+  - enabled: 1
+    path: Assets/Scenes/StoryText.unity

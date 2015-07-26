@@ -45,10 +45,15 @@ public class WakeMeUp : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
 
 		// Start timming
-		GameManager.Instance.StartMiniGame(20, -1, 0, 0);
+        Timming.Start(20.0f, onFinish);
         iTween.MoveTo(Head, Vector3.zero, 1.0f);
         Budzik.GetComponent<AudioSource>().volume = 0.4f;
 	}
+
+    void onFinish()
+    {
+        GameManager.Instance.GameOver();
+    }
 
 	// Update is called once per frame
 	private void Update()
@@ -74,7 +79,7 @@ public class WakeMeUp : MonoBehaviour
 			// Game won
             Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
-            GameManager.Instance.AddScore((1 - Timming.Instance.Position) * 1000.0f);
+            GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
             GameManager.Instance.NextLevel();
 		}
 		else

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	private int _currentLevel = -1;
 	private int _currentDay;
 
+    public int LastStoryIndex;
+
 	public static bool isActive
 	{
 		get { return _instance != null; }
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        LastStoryIndex = -1;
+
         ResetData();
 
         // get current level
@@ -83,24 +87,6 @@ public class GameManager : MonoBehaviour
 		{
 			NextLevel();
 		}
-	}
-
-	/// <summary>
-	/// Create timming slider
-	/// </summary>
-	/// <param name="secondsToLoose">Amount of seconds to game over (-1 to disable)</param>
-	/// <param name="secondsToWin">Amount of seconds to win a level (-1 to disable)</param>
-	/// <param name="cooldownBefore">Amount of seconds before timer start</param>
-	/// <param name="cooldownAfter">Amount of seconds before timer end</param>
-	public void StartMiniGame(float secondsToLoose, float secondsToWin, float cooldownBefore, float cooldownAfter)
-	{
-		Object prefab = Resources.Load("Timming");
-		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-		var timming = go.GetComponent<Timming>();
-		timming.SecondsToWin = secondsToWin;
-		timming.CooldownAfter = cooldownAfter;
-		timming.CooldownBefore = cooldownBefore;
-		timming.SecondsToLoose = secondsToLoose;
 	}
 
 	public void GameOver()
@@ -151,6 +137,13 @@ public class GameManager : MonoBehaviour
 	{
 		_score += gain;
 	}
+
+    public void ShowStory(int storyIndex)
+    {
+        LastStoryIndex = storyIndex;
+        Camera.main.cullingMask = 0;
+        Application.LoadLevel("StoryText");
+    }
 
 	public struct LevelDesc
 	{
@@ -209,4 +202,11 @@ public class GameManager : MonoBehaviour
 			}
 		},
 	};
+
+    public string[] Stories = new[]
+    {
+        @"Who: CorpoMan
+Where: City
+Target: survive, earn money, sleep",
+    };
 }

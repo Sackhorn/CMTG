@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
      <Compile Include="Assets\Scripts\SpawnScript.cs" />
      <Compile Include="Assets\Scripts\SpriteFit2Screen.cs" />
+     <Compile Include="Assets\Scripts\StoryLogic.cs" />
      <Compile Include="Assets\Scripts\StrokeManager.cs" />
      <Compile Include="Assets\Scripts\Timming.cs" />
      <Compile Include="Assets\Scripts\WakeMeUp.cs" />
