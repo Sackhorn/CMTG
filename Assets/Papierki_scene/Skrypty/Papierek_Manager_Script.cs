@@ -128,14 +128,13 @@ public class Papierek_Manager_Script : MonoBehaviour
                     StartTimer();
                 }
             }
-            else if (!_juzPoSeksie)
+            else 
             {
                 Debug.Log("Spierdalaj do innej sceny");
 				StartCoroutine(NextScene());
             }
-
         }
-        else if (!_juzPoDeadzie)
+        else
         {
             if (areYouDead)
             {
@@ -161,7 +160,7 @@ public class Papierek_Manager_Script : MonoBehaviour
 		Debug.Log("tablica showana");
 		//GameObject.Find ("Player").GetComponent<Animator> ().PlayInFixedTime ("sit_000");
 		//GameObject.Find ("Player").GetComponent<Animator> ().Play ("walk-1_000");
-		GameObject.Find ("Player").GetComponent<Player_Script> ().target = new Vector2 (200f, -45.4f);
+		GameObject.Find ("Player").GetComponent<Player_Script> ().target = new Vector2 (75.3f, -45.4f);
 		StartCoroutine (GameObject.Find ("Player").GetComponent<Player_Script> ().KickPlyaer ());
 		//StartCoroutine(GameObject.Find ("Player").GetComponent<Player_Script> ().AnimatePlayer());
 		//GameObject.Find ("Player").GetComponent<SpriteRenderer> ().sprite = sprajt;

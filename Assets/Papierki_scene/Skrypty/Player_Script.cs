@@ -21,10 +21,12 @@ public class Player_Script : MonoBehaviour
 
 	public IEnumerator KickPlyaer()
 	{
-		gameObject.GetComponent<Animator> ().SetTrigger ("IsStandingUp");
-		yield return new WaitForSeconds (0.5f);
+		gameObject.GetComponent<Animator> ().SetTrigger ("IsShiaRightFromSittin");
+
 		while (Vector2.Distance(transform.position, target) > 2.5f)
 		{
+			//yield return new WaitForSeconds (2f);
+			gameObject.GetComponent<Animator> ().SetTrigger ("IsWalking");
 			transform.position = Vector2.Lerp(transform.position, target, smoothing * Time.deltaTime);
 			yield return null;
 		}

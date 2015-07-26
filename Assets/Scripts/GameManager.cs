@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 	private int _currentLevel = -1;
 	public int _currentDay;
 
-    public int LastStoryIndex;
+	public int LastStoryIndex;
 
 	public static bool isActive
 	{
@@ -45,26 +45,26 @@ public class GameManager : MonoBehaviour
 		get { return _score; }
 	}
 
-    private void Awake()
-    {
-        LastStoryIndex = -1;
+	private void Awake()
+	{
+		LastStoryIndex = -1;
 
-        ResetData();
+		ResetData();
 
-        // get current level
-        for (int i = 0; i < Levels.Length; i++)
-        {
-            if (Levels[i].Name == Application.loadedLevelName)
-            {
-                _currentLevel = i;
-                break;
-            }
-        }
-        
-        Debug.LogWarning("Awake: " + Application.loadedLevelName + ", id: " + _currentLevel);
-    }
+		// get current level
+		for (int i = 0; i < Levels.Length; i++)
+		{
+			if (Levels[i].Name == Application.loadedLevelName)
+			{
+				_currentLevel = i;
+				break;
+			}
+		}
+		
+		Debug.LogWarning("Awake: " + Application.loadedLevelName + ", id: " + _currentLevel);
+	}
 
-    private void Update()
+	private void Update()
 	{
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
 	public void GameOver()
 	{
 		_currentLevel = -1;
-        Debug.LogWarning("GameOver");
+		Debug.LogWarning("GameOver");
 		Fade.FadeThisSit("gameKurwaOver");
 	}
 
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 			_currentDay++;
 		}
 
-        Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
+		Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
 
 		Fade.FadeThisSit(Levels[_currentLevel].Name);//, Levels[_currentLevel].FadeTime);
 	}
@@ -138,24 +138,31 @@ public class GameManager : MonoBehaviour
 		_score += gain;
 	}
 
-    public void ShowStory(int storyIndex)
-    {
-        LastStoryIndex = storyIndex;
+	public void ShowStory(int storyIndex)
+	{
+		LastStoryIndex = storyIndex;
 
-        Fade.FadeThisSit("StoryText");
-        //Camera.main.cullingMask = 0;
-        //Application.LoadLevel("StoryText");
-    }
+		if (_currentDay == 0)
+		{
+			Fade.FadeThisSit("StoryText");
+			//Camera.main.cullingMask = 0;
+			//Application.LoadLevel("StoryText");
+		}
+		else
+		{
+			NextLevel();
+		}
+	}
 
-    public void NextStory()
-    {
+	public void NextStory()
+	{
 
-        LastStoryIndex = _currentLevel;
-        Camera.main.cullingMask = 0;
-        Application.LoadLevel("StoryText");
-    }
+		LastStoryIndex = _currentLevel;
+		Camera.main.cullingMask = 0;
+		Application.LoadLevel("StoryText");
+	}
 
-    public struct LevelDesc
+	public struct LevelDesc
 	{
 		/// <summary>
 		/// Name of the scene file
@@ -213,10 +220,10 @@ public class GameManager : MonoBehaviour
 		},
 	};
 
-    public string[] Stories = new[]
-    {
-        @"Who: CorpoMan
+	public string[] Stories = new[]
+	{
+		@"Who: CorpoMan
 Where: Each City
 Target: wake up, earn money, survive",
-    };
+	};
 }
