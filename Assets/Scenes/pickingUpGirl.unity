@@ -578,6 +578,8 @@ MonoBehaviour:
   ArrowSpeed: 60
   SoundEndOffset: 1
   Klawisze: {fileID: 903398584}
+  Sound1: {fileID: 8300000, guid: ffaccad835c18c64f97f747b21a602d7, type: 3}
+  Sound2: {fileID: 8300000, guid: 91e4b2d66f37cd64cb7a1202d962f67e, type: 3}
 --- !u!4 &1346824083
 Transform:
   m_ObjectHideFlags: 0

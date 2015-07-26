@@ -31,8 +31,8 @@ public class WakeMeUp : MonoBehaviour
 	// Use this for initialization
 	private void Start()
 	{
-		  MoveDownSpeed = 0.11f;
-		MoveUpSpeed = 1.2f;//0.3f;
+		  MoveDownSpeed = 0.105f;
+		MoveUpSpeed = 1.5f;//0.3f;
 			cooldown = 3;
 
 		_isRunning = false;
