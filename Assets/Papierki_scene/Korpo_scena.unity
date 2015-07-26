@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 1501478863}
-  smoothing: 1
+  smoothing: 3
   manager: {fileID: 1813362353}
   origin: {x: 11.6000004, y: -205}
 --- !u!1 &321505736
@@ -275,7 +275,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59dfdc442586354bb01ab9180aadff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Shader: {fileID: 4800000, guid: dfc7d29e17b30d54fb786b32a1dc238e, type: 3}
+  FadeInTime: 1.5
+  FadeOutTime: 1.5
 --- !u!81 &321505739
 AudioListener:
   m_ObjectHideFlags: 0

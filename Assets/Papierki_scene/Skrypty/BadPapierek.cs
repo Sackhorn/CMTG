@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BadPapierek : MonoBehaviour {
 	bool destroy;
+	public GameObject kaczka;
 
 	void Awake()
 	{
@@ -17,6 +18,7 @@ public class BadPapierek : MonoBehaviour {
 		Papierek_Manager_Script pm=Papierek_Manager_Script.instance ();
 		pm.papierkiCount++;
 		pm.lifesLeft=pm.lifesLeft-1;
+		Instantiate(kaczka);
 
 	}
 
