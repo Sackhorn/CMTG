@@ -16,15 +16,38 @@ public class HealthPoints : MonoBehaviour
     public float ArrowSpeed = 60;
     public float SoundEndOffset = 1.2f;
 
+    public GameObject Klawisze;
+
 	private void Start()
 	{
         _source = gameObject.GetComponent<AudioSource>();
-        Timming.Start(_source.clip.length, onFinish);
+        //Timming.Start(_source.clip.length, onFinish);
+	    StartCoroutine("game");
 	}
 
-    void onFinish()
+    IEnumerator game()
     {
-        Debug.LogWarning("ssssssssssssssssss");
+        float t1, t2 = 0;
+        t1 = Time.time;
+
+        while (Klawisze.transform.localPosition.x > -350)
+        {
+            Klawisze.transform.localPosition -= new Vector3(80 * Time.deltaTime, 0, 0);
+
+            if (Klawisze.transform.localPosition.x < -50 && !_source.isPlaying)
+            {
+                t2 = Time.time;
+                _source.Play();
+            }
+
+            yield return new WaitForSeconds(0.005f);
+        }
+
+        //Debug.LogWarning("ait: "+ (t2 - t1).ToString());
+
+        yield return new WaitForSeconds(_source.clip.length - (t2 - t1));
+
+       // Debug.LogWarning("ssssssssssssssssss");
 
         GameManager.Instance.NextLevel();
     }
@@ -41,7 +64,7 @@ public class HealthPoints : MonoBehaviour
 		}
 
 	    float distance = 118.6f + off;
-        if (_source.clip.length - _source.time - SoundEndOffset > distance / ArrowSpeed)
+        if (_source.isPlaying && _source.clip.length - _source.time - SoundEndOffset > distance / ArrowSpeed)
 	    {
 	        time += Time.deltaTime;
 	        if (time >= spawnTime)

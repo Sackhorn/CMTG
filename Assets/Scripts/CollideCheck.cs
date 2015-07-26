@@ -40,6 +40,12 @@ public class CollideCheck : MonoBehaviour
             {
                 HealthPoints.decreaseHP();
             }
+
+           // gameObject.transform.localScale = new Vector3(2, 2, 2);
+        }
+        else
+        {
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
         }
     }
 

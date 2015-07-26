@@ -39,6 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faeeb4acf00a0954aa7f5c05dfd75172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprajt: {fileID: 0}
+  timeTillNextScene: 0
   papierekLifeSpan: 5
   papierkiCount: 14
   papierkiNumb: 10
@@ -46,7 +48,9 @@ MonoBehaviour:
   minApperanceTime: .300000012
   maxApperanceTime: 2
   nextApperance: .255859911
-  GoodPapierek: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
+  GoodPapierek_1: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
+  GoodPapierek_2: {fileID: 139000, guid: 5fd47ff2fe60b594ea597bfee0300df3, type: 2}
+  GoodPapierek_3: {fileID: 147488, guid: 6b07e148978a42641a0ea2feb7ac9aa5, type: 2}
   BadPapierek: {fileID: 118104, guid: 248328480cf5d6649b690db813472752, type: 2}
   tablica: {fileID: 0}
   BadPapierekProbabiity: .5
@@ -65,6 +69,18 @@ Prefab:
       propertyPath: lifesLeft
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: GoodPapierek_1
+      value: 
+      objectReference: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
+    - target: {fileID: 0}
+      propertyPath: GoodPapierek_2
+      value: 
+      objectReference: {fileID: 139000, guid: 5fd47ff2fe60b594ea597bfee0300df3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: GoodPapierek_3
+      value: 
+      objectReference: {fileID: 147488, guid: 6b07e148978a42641a0ea2feb7ac9aa5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 162922}

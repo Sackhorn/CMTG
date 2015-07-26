@@ -9,8 +9,15 @@ public class GameOverLogic : MonoBehaviour
 	{
 		//gameObject.GetComponent<AudioSource>().Play();
 
-		GameObject.Find("UI").transform.FindChild("Info").GetComponent<Text>().text = "SCORE: " + GameManager.Instance.Score + "\nCLICKS: " + GameManager.Instance.Clicks;
-	}
+		
+
+        if (PlayerPrefs.GetInt("HighScore") < GameManager.Instance.Score)
+        {
+            PlayerPrefs.SetInt("HighScore", GameManager.Instance.Score);
+        }
+
+        GameObject.Find("UI").transform.FindChild("Info").GetComponent<Text>().text = "SCORE: " + GameManager.Instance.Score + "\nHIGHSCORE: " + PlayerPrefs.GetInt("HighScore") + "\nCLICKS: " + GameManager.Instance.Clicks;
+    }
 	
 	// Update is called once per frame
 	void Update ()

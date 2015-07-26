@@ -28,6 +28,9 @@ public class Fade : MonoBehaviour
 
     private void Update()
     {
+        if (_image == null)
+            return;
+
         if (_fadeIn)
         {
             _fadeInAcc += Time.deltaTime;
@@ -74,6 +77,7 @@ public class Fade : MonoBehaviour
         }
 
         // No fade just go! Go!
+        Debug.Log("Fade without a fade.");
         Application.LoadLevel(nextScene);
 
         // Error
