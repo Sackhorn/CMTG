@@ -5,6 +5,8 @@ public class WakeMeUp : MonoBehaviour
 {
 	public GameObject Head;
     public GameObject Budzik;
+	public Sprite setSprite;
+	public GameObject obj;
 
     public float MoveDownSpeed = 0.15f;
     public float MoveUpSpeed = 0.3f;
@@ -22,6 +24,7 @@ public class WakeMeUp : MonoBehaviour
 
 	private const float _eyesHeight = 7.2f;
 
+	public float animTime;
 	// Use this for initialization
 	private void Start()
 	{
@@ -50,9 +53,29 @@ public class WakeMeUp : MonoBehaviour
         Budzik.GetComponent<AudioSource>().volume = 0.4f;
 	}
 
+	public IEnumerator WakeUpAnim()
+	{
+		GameObject.Find("budzik1").GetComponent<Animator>().enabled = false;
+		GameObject.Find("budzik1").GetComponent<SpriteRenderer>().sprite = setSprite;
+		iTween.MoveTo(Head,new Vector3(1500,0,0), 2.0f);
+		yield return new WaitForSeconds(animTime);
+		GameObject.Find("room").GetComponent<Animator>().enabled=true;
+		yield return new WaitForSeconds(0.9f);
+		Debug.Log("kutas");
+		obj.SetActive(true);
+		iTween.MoveTo(obj, new Vector3(140,-39,0), 2.0f);
+		obj.GetComponent<Animator>().SetTrigger("trigger");
+
+		yield return new WaitForSeconds(animTime);
+		GameManager.Instance.NextLevel();
+
+
+	}
+
     void onFinish()
     {
-        GameManager.Instance.GameOver();
+		GameManager.Instance.GameOver();
+
     }
 
 	// Update is called once per frame
@@ -80,7 +103,8 @@ public class WakeMeUp : MonoBehaviour
             Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
             GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
-            GameManager.Instance.NextLevel();
+			StartCoroutine("WakeUpAnim");
+            
 		}
 		else
 		{
