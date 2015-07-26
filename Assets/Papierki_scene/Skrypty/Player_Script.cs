@@ -3,29 +3,32 @@ using System.Collections;
 
 public class Player_Script : MonoBehaviour
 {
-    public float smoothing = 100.0f;
-    public Vector3 target = new Vector3(75.3f, -45.4f, 0);
+	public float waitFor;
+    public float smoothing;
+    public Vector2 target = new Vector2(75.3f, -45.4f);
 
     public IEnumerator AnimatePlayer()
     {
-        while (Vector2.Distance(transform.position, target) > 5f)
+        while (Vector2.Distance(transform.position, target) > 2.5f)
         {
-            transform.position = Vector3.Slerp(transform.position, target, smoothing * Time.deltaTime);
+            transform.position = Vector2.Lerp(transform.position, target, smoothing * Time.deltaTime);
             yield return null;
         }
         gameObject.GetComponent<Animator>().SetTrigger("IsSittingDown");
+		yield return new WaitForSeconds (0.25f);
         StartCoroutine(GameObject.Find("tablica").GetComponent<TablicaScript>().StartMoving());
     }
 
-    // Use this for initialization
-    private void Start()
-    {
+	public IEnumerator KickPlyaer()
+	{
+		gameObject.GetComponent<Animator> ().SetTrigger ("IsStandingUp");
+		yield return new WaitForSeconds (0.5f);
+		while (Vector2.Distance(transform.position, target) > 2.5f)
+		{
+			transform.position = Vector2.Lerp(transform.position, target, smoothing * Time.deltaTime);
+			yield return null;
+		}
 
-    }
+	}
 
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
 }
