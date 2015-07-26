@@ -33,6 +33,15 @@ public class Timming : MonoBehaviour
     }
 
     /// <summary>
+    /// Stops the timer
+    /// </summary>
+    public static void Stop()
+    {
+        Destroy(_timer);
+        _timer = null;
+    }
+
+    /// <summary>
     /// Current timmer position in range [0;1]
     /// </summary>
     public static float Position

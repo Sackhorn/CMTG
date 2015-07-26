@@ -7,6 +7,7 @@ public class WakeMeUp : MonoBehaviour
     public GameObject Budzik;
 	public Sprite setSprite;
 	public GameObject obj;
+    public GameObject AnimBudzika;
 
     public float MoveDownSpeed = 0.15f;
     public float MoveUpSpeed = 0.3f;
@@ -24,10 +25,14 @@ public class WakeMeUp : MonoBehaviour
 
 	private const float _eyesHeight = 7.2f;
 
+    private bool _isRunning;
+
 	public float animTime;
 	// Use this for initialization
 	private void Start()
 	{
+	    _isRunning = false;
+
 		// cache objects
 		_leftEye = Head.transform.FindChild("LeftEye").gameObject;
 		_rightEye = Head.transform.FindChild("RightEye").gameObject;
@@ -41,6 +46,7 @@ public class WakeMeUp : MonoBehaviour
 		_rightEyePos = 0;
 
         DayConfigurator(GameManager.Instance._currentDay);
+       AnimBudzika.GetComponent<Animator>().enabled = false;
 
         StartCoroutine("StartGame");
 	}
@@ -52,32 +58,60 @@ public class WakeMeUp : MonoBehaviour
 
     public IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(1);
+
+        Budzik.GetComponent<AudioSource>().Play();
+        AnimBudzika.GetComponent<Animator>().enabled = true;
+
+        var myszka = Head.transform.FindChild("myszka");
+        var pos = myszka.localPosition;
+        myszka.localPosition = new Vector3(pos.x, -60, 0);
+
+        yield return new WaitForSeconds(cooldown - 1);
 
 		// Start timming
-        Timming.Start(20.0f, onFinish);
-        iTween.MoveTo(Head, Vector3.zero, 1.0f);
+        iTween.MoveTo(Head, new Vector3(0, 53, 0), 1.0f);
         Budzik.GetComponent<AudioSource>().volume = 0.4f;
-	}
 
-	public IEnumerator WakeUpAnim()
-	{
-		GameObject.Find("budzik1").GetComponent<Animator>().enabled = false;
-		GameObject.Find("budzik1").GetComponent<SpriteRenderer>().sprite = setSprite;
-		iTween.MoveTo(Head,new Vector3(1500,0,0), 2.0f);
-		yield return new WaitForSeconds(animTime);
-		GameObject.Find("room").GetComponent<Animator>().enabled=true;
-		yield return new WaitForSeconds(0.9f);
-		Debug.Log("kutas");
-		obj.SetActive(true);
-		iTween.MoveTo(obj, new Vector3(140,-39,0), 2.0f);
-		obj.GetComponent<Animator>().SetTrigger("trigger");
+        while (myszka.localPosition.y < pos.y)
+        {
+            myszka.localPosition += new Vector3(0, 50 * Time.deltaTime, 0);
+            yield return new WaitForSeconds(0.005f);
+        }
 
-		yield return new WaitForSeconds(animTime);
-		GameManager.Instance.NextLevel();
+        yield return new WaitForSeconds(1.0f);
 
+        _isRunning = true;
+        Timming.Start(20.0f, onFinish);
 
-	}
+        yield return new WaitForSeconds(1.0f);
+        myszka.gameObject.SetActive(false);
+    }
+
+    public IEnumerator WakeUpAnim()
+    {
+        Timming.Stop();
+
+        GameObject.Find("budzik1").GetComponent<Animator>().enabled = false;
+        GameObject.Find("budzik1").GetComponent<SpriteRenderer>().sprite = setSprite;
+        iTween.MoveTo(Head, new Vector3(1500, 0, 0), 2.0f);
+
+        //yield return new WaitForSeconds(animTime);
+
+        GameObject.Find("room").GetComponent<Animator>().enabled = true;
+
+        yield return new WaitForSeconds(0.9f);
+
+        Debug.Log("kutas");
+        //obj.SetActive(true);
+
+        iTween.MoveTo(obj, new Vector3(140, -39, 0), 2.0f);
+        obj.GetComponent<Animator>().SetTrigger("trigger");
+
+        yield return new WaitForSeconds(animTime);
+
+        GameManager.Instance.NextLevel();
+    }
 
     void onFinish()
     {
@@ -89,7 +123,7 @@ public class WakeMeUp : MonoBehaviour
 	private void Update()
 	{
 		// check if update more
-		if(_rightEyePos == 100)
+        if (_rightEyePos == 100 || !_isRunning)
 			return;
 
 		// check input
