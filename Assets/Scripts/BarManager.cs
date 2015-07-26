@@ -35,7 +35,12 @@ public class BarManager : MonoBehaviour
         float blue;
         float difference = Mathf.Abs(gameObject.transform.position.x - stroke.position.x);
 
-        difference = (difference / (widithFactor/2))/16 ;
+        if (!playerManager.Faiiling)
+        {
+            GameManager.Instance.AddScore(1);
+        }
+
+        difference = (difference / (widithFactor / 2)) / 16;
 
         if (difference > 1)
         {
@@ -46,17 +51,15 @@ public class BarManager : MonoBehaviour
             blue = difference;
         }
 
-        spriteRenderer.color = new Color(1f, 1f - green, 1f - blue);
-
-        
+        spriteRenderer.color = new Color(1f, 1f - green, 1f - blue);   
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "leftBorder" || collision.gameObject.tag == "rightBorder")
         {
-            speed = -speed;
-            _rigidbody2D.velocity = new Vector2(speed, 0f);
+            //speed = -speed;
+            //_rigidbody2D.velocity = new Vector2(speed, 0f);
         }
         else if (collision.gameObject.tag == "stroke")
         {
@@ -78,9 +81,9 @@ public class BarManager : MonoBehaviour
         
         yield return new WaitForSeconds(secondsToChange);
         secondsToChange = Random.Range(minTime, maxTime);
-        speed = -speed;
+       // speed = -speed;
 
-        _rigidbody2D.velocity = new Vector2(speed, 0f);
+        //_rigidbody2D.velocity = new Vector2(speed, 0f);
 
         StartCoroutine("ChangeDirection");
 
