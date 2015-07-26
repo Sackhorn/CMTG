@@ -74,6 +74,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\DancerMovement.cs" />
     <Compile Include="Assets\DestroyerScript.cs" />
     <Compile Include="Assets\HealthPoints.cs" />
     <Compile Include="Assets\Papierki_scene\Skrypty\BadPapierek.cs" />
