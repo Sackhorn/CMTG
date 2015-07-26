@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	private int _clicks;
 	private int _score;
 	private int _currentLevel = -1;
-	private int _currentDay;
+	public int _currentDay;
 
     public int LastStoryIndex;
 
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
 	{
 		_currentLevel = -1;
         Debug.LogWarning("GameOver");
-		Fade.FadeThisSit("gameKurwaOver", 0.4f);
+		Fade.FadeThisSit("gameKurwaOver");
 	}
 
 	public void NextLevel()
@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
 
-		Fade.FadeThisSit(Levels[_currentLevel].Name, Levels[_currentLevel].FadeTime);
+		Fade.FadeThisSit(Levels[_currentLevel].Name);//, Levels[_currentLevel].FadeTime);
 	}
 
 	public void ResetData()
@@ -141,11 +141,21 @@ public class GameManager : MonoBehaviour
     public void ShowStory(int storyIndex)
     {
         LastStoryIndex = storyIndex;
+
+        Fade.FadeThisSit("StoryText");
+        //Camera.main.cullingMask = 0;
+        //Application.LoadLevel("StoryText");
+    }
+
+    public void NextStory()
+    {
+
+        LastStoryIndex = _currentLevel;
         Camera.main.cullingMask = 0;
         Application.LoadLevel("StoryText");
     }
 
-	public struct LevelDesc
+    public struct LevelDesc
 	{
 		/// <summary>
 		/// Name of the scene file
@@ -206,7 +216,7 @@ public class GameManager : MonoBehaviour
     public string[] Stories = new[]
     {
         @"Who: CorpoMan
-Where: City
-Target: survive, earn money, sleep",
+Where: Each City
+Target: wake up, earn money, survive",
     };
 }

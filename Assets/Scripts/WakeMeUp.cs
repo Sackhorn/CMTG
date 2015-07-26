@@ -37,8 +37,15 @@ public class WakeMeUp : MonoBehaviour
 		_leftEyePos = 0;
 		_rightEyePos = 0;
 
+        DayConfigurator(GameManager.Instance._currentDay);
+
         StartCoroutine("StartGame");
 	}
+
+    private void DayConfigurator(int dayNumber)
+    {
+
+    }
 
     public IEnumerator StartGame()
     {
@@ -80,7 +87,8 @@ public class WakeMeUp : MonoBehaviour
             Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
             GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
-            GameManager.Instance.NextLevel();
+            GameManager.Instance.ShowStory(0);
+           // GameManager.Instance.NextLevel();
 		}
 		else
 		{

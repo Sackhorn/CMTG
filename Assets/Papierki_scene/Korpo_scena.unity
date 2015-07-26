@@ -87,6 +87,80 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &46916308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 46916312}
+  - 114: {fileID: 46916311}
+  - 114: {fileID: 46916310}
+  - 114: {fileID: 46916309}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &46916309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46916308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AllowActivationOnStandalone: 0
+--- !u!114 &46916310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46916308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
+  m_AllowActivationOnMobileDevice: 0
+--- !u!114 &46916311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46916308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &46916312
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46916308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &56816232
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +230,7 @@ MonoBehaviour:
   background: {fileID: 1501478863}
   smoothing: 1
   manager: {fileID: 1813362353}
+  origin: {x: 11.6000004, y: -205}
 --- !u!1 &321505736
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +395,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 781852673}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -44.5999985, z: 0}
+  m_LocalPosition: {x: -9.10000038, y: -44.5999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -545,17 +620,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faeeb4acf00a0954aa7f5c05dfd75172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprajt: {fileID: 21300000, guid: 64c6e84d0d1a5684180bf43a2d354a06, type: 3}
+  timeTillNextScene: 6
   papierekLifeSpan: 1
   papierkiCount: 0
-  papierkiNumb: 10
+  papierkiNumb: 3
   lifesLeft: 3
   minApperanceTime: .5
   maxApperanceTime: 1
   nextApperance: 1
-  GoodPapierek: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
+  GoodPapierek_1: {fileID: 152102, guid: 80e484c56baee3a4ca0ee4302a717512, type: 2}
+  GoodPapierek_2: {fileID: 139000, guid: 5fd47ff2fe60b594ea597bfee0300df3, type: 2}
+  GoodPapierek_3: {fileID: 147488, guid: 6b07e148978a42641a0ea2feb7ac9aa5, type: 2}
   BadPapierek: {fileID: 118104, guid: 248328480cf5d6649b690db813472752, type: 2}
   tablica: {fileID: 56816234}
-  BadPapierekProbabiity: .300000012
+  BadPapierekProbabiity: .5
 --- !u!4 &1813362355
 Transform:
   m_ObjectHideFlags: 0
@@ -690,7 +769,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1932390245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -112.099998, y: -188.699997, z: 0}
+  m_LocalPosition: {x: -252.699997, y: -45.2999992, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -706,5 +785,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a0a9d708739a444bd63c8defcd22d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothing: 1
-  target: {x: 75.3000031, y: -45.4000015, z: 0}
+  waitFor: 3
+  smoothing: 2
+  target: {x: 75.3000031, y: -45.4000015}
