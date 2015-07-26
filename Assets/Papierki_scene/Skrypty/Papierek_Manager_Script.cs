@@ -128,14 +128,14 @@ public class Papierek_Manager_Script : MonoBehaviour
                     StartTimer();
                 }
             }
-            else if (!_juzPoSeksie)
+            else
             {
                 Debug.Log("Spierdalaj do innej sceny");
 				StartCoroutine(NextScene());
             }
 
         }
-        else if (!_juzPoDeadzie)
+        else
         {
             if (areYouDead)
             {
