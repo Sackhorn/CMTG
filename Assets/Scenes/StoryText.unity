@@ -332,7 +332,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
@@ -361,7 +361,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 943, y: 444.339996}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2125949951
 MonoBehaviour:
@@ -374,8 +374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f349a3a0ba63e7041bed0cd278bf4b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeCharAudio: {fileID: 0}
-  TypePause: .100000001
+  TypeSounds:
+  - {fileID: 8300000, guid: 815ce45a2bfb57c49abc8f8865add333, type: 3}
+  - {fileID: 8300000, guid: 24dd403f6c8492b41b16a0f7502e5188, type: 3}
+  TypePause: .0500000007
 --- !u!82 &2125949952
 AudioSource:
   m_ObjectHideFlags: 0
