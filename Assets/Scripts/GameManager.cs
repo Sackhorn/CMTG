@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	private int _clicks;
 	private int _score;
 	private int _currentLevel = -1;
-	private int _currentDay;
+	public int _currentDay;
 
     public int LastStoryIndex;
 
@@ -147,7 +147,15 @@ public class GameManager : MonoBehaviour
         //Application.LoadLevel("StoryText");
     }
 
-	public struct LevelDesc
+    public void NextStory()
+    {
+
+        LastStoryIndex = _currentLevel;
+        Camera.main.cullingMask = 0;
+        Application.LoadLevel("StoryText");
+    }
+
+    public struct LevelDesc
 	{
 		/// <summary>
 		/// Name of the scene file
@@ -208,7 +216,7 @@ public class GameManager : MonoBehaviour
     public string[] Stories = new[]
     {
         @"Who: CorpoMan
-Where: City
-Target: survive, earn money, sleep",
+Where: Each City
+Target: wake up, earn money, survive",
     };
 }
