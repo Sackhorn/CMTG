@@ -22,6 +22,8 @@ public class StoryLogic : MonoBehaviour
         if (index < 0)
             index = 0;
         _message = GameManager.Instance.Stories[index];
+        if (index == 1)
+            _message += GameManager.Instance._currentDay + 1;
         _text.text = String.Empty;
         _typeSoundIndex = 0;
 

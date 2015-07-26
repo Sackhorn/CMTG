@@ -12,6 +12,10 @@ public class PlayerManager_Bridge : MonoBehaviour
     private Quaternion rotation;
     public float kupa;
 
+    public GameObject Info;
+
+    private bool _isRunning;
+
     public bool Faiiling
     {
         get { return falling; }
@@ -20,7 +24,25 @@ public class PlayerManager_Bridge : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        _isRunning = false;
+
+        StartCoroutine("game");
+    }
+
+    IEnumerator game()
+    {
+        while (Info.transform.localPosition.y < 106)
+        {
+            Info.transform.localPosition += new Vector3(0, 300 * Time.deltaTime, 0);
+            yield return new WaitForSeconds(0.0005f);
+        }
+
+        yield return new WaitForSeconds(1.5f);
+
+        Info.SetActive(false);
+
         Timming.Start(12, onFinish);
+        _isRunning = true;
     }
 
     private void onFinish()
@@ -31,6 +53,9 @@ public class PlayerManager_Bridge : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!_isRunning)
+            return;
+
         //Mathf.PingPong(Time.time,kupa);
         if (timeToFall > startTimeToFall)
         {
@@ -59,5 +84,10 @@ public class PlayerManager_Bridge : MonoBehaviour
     public void StopFalling()
     {
         falling = false;
+    }
+
+    public bool IsRunning
+    {
+        get { return _isRunning; }
     }
 }

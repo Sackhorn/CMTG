@@ -20,7 +20,7 @@ public class GoodPapierek : MonoBehaviour {
 		gameObject.GetComponent<SpriteRenderer> ().color = Color.gray;
 		Papierek_Manager_Script pm=Papierek_Manager_Script.instance ();
 		pm.papierkiCount++;
-
+		GameManager.Instance.AddScore (50f);
 	}
 
 	IEnumerator StartAutodestruction()
@@ -28,16 +28,18 @@ public class GoodPapierek : MonoBehaviour {
 		yield return new WaitForSeconds (Papierek_Manager_Script.instance ().papierekLifeSpan);
 			if (destroy) 
 				{
-					/*GameObject tmp;
+					GameObject tmp;
 
 
-			tmp =(GameObject)Instantiate(krzyz,gameObject.transform.position,Quaternion.identity);
-			tmp.transform.parent=gameObject.transform;
-			tmp.transform.position=new Vector2(0,0);*/
-			//yield return new WaitForSeconds(0.1f);
-					Instantiate(kaczka);
+			tmp =(GameObject)Instantiate(krzyz);
+			//tmp.transform.parent=gameObject.transform;
+			tmp.transform.position=new Vector2(gameObject.transform.position.x+55,gameObject.transform.position.y+30);
+			Instantiate(kaczka);
+			yield return new WaitForSeconds(0.1f);
+					
 					--Papierek_Manager_Script.instance ().lifesLeft;
 					Destroy (gameObject);
+					Destroy (tmp);
 					
 				}
 

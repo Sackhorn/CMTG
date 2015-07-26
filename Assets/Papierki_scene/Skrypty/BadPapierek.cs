@@ -19,6 +19,7 @@ public class BadPapierek : MonoBehaviour {
 		pm.papierkiCount++;
 		pm.lifesLeft=pm.lifesLeft-1;
 		Instantiate(kaczka);
+		GameManager.Instance.AddScore (-100f);
 
 	}
 
