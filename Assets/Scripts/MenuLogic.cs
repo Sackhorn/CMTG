@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class MenuLogic : MonoBehaviour
 {
+    public GameObject Logo;
+
     private Camera _cam;
     private Vector3 _initPos;
 
@@ -23,6 +25,9 @@ public class MenuLogic : MonoBehaviour
         //280, 480
         _cam.transform.position = _initPos - new Vector3(Mathf.Lerp(0, 150, 1 - Mathf.Clamp01((float)Screen.width / Screen.height - 1.0f)), 0, 0);
         //_cam.transform.position = _initPos - new Vector3(Mathf.Lerp(0, , Screen.width * 0.4f), 0, 0);
+
+        var pos = Logo.transform.position;
+        Logo.transform.position = new Vector3(_cam.transform.position.x, pos.y, pos.z);
     }
 
     public void doIt()
