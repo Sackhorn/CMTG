@@ -85,24 +85,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Create timming slider
-	/// </summary>
-	/// <param name="secondsToLoose">Amount of seconds to game over (-1 to disable)</param>
-	/// <param name="secondsToWin">Amount of seconds to win a level (-1 to disable)</param>
-	/// <param name="cooldownBefore">Amount of seconds before timer start</param>
-	/// <param name="cooldownAfter">Amount of seconds before timer end</param>
-	public void StartMiniGame(float secondsToLoose, float secondsToWin, float cooldownBefore, float cooldownAfter)
-	{
-		Object prefab = Resources.Load("Timming");
-		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-		var timming = go.GetComponent<Timming>();
-		timming.SecondsToWin = secondsToWin;
-		timming.CooldownAfter = cooldownAfter;
-		timming.CooldownBefore = cooldownBefore;
-		timming.SecondsToLoose = secondsToLoose;
-	}
-
 	public void GameOver()
 	{
 		_currentLevel = -1;
