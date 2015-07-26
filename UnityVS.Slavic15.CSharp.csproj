@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\FadeBlackToTransparent.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GameOverLogic.cs" />
+    <Compile Include="Assets\Scripts\MenuButton.cs" />
     <Compile Include="Assets\Scripts\MenuLogic.cs" />
     <Compile Include="Assets\Scripts\PlayerManager_Bridge.cs" />
     <Compile Include="Assets\Scripts\SpawnScript.cs" />
