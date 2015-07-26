@@ -14,6 +14,8 @@ public class StrokeManager : MonoBehaviour
     void Start()
     {
         rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        DayConfigurator(GameManager.Instance._currentDay);
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +27,14 @@ public class StrokeManager : MonoBehaviour
         else if (collision.gameObject.tag == "rightBorder")
         {
             touchRightBorder = true;
+        }
+    }
+
+    private void DayConfigurator(int dayNumber)
+    {
+        for (int i = 0; i < dayNumber; i++)
+        {
+            strokeSpeed = strokeSpeed * 1.1f;
         }
     }
 

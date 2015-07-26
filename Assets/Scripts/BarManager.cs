@@ -20,6 +20,7 @@ public class BarManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        DayConfigurator(GameManager.Instance._currentDay);
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         secondsToChange = secondsToStart;
@@ -51,7 +52,17 @@ public class BarManager : MonoBehaviour
             blue = difference;
         }
 
+
+
         spriteRenderer.color = new Color(1f, 1f - green, 1f - blue);   
+    }
+
+    private void DayConfigurator(int dayNumber)
+    {
+        for (int i = 0; i < dayNumber; i++)
+        {
+            speed = speed * 1.1f;
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
