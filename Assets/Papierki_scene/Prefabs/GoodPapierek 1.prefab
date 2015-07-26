@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d59ae96ebdf59842a2ee65bc0bc6e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kaczka: {fileID: 151536, guid: 1edd9155bcbad3a4b98c5c0213f71493, type: 2}
+  krzyz: {fileID: 188834, guid: 2d198e40dd2cf244d9f5df5b7e9227e5, type: 2}
 --- !u!212 &21228420
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -96,6 +98,14 @@ Prefab:
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: kaczka
+      value: 
+      objectReference: {fileID: 151536, guid: 1edd9155bcbad3a4b98c5c0213f71493, type: 2}
+    - target: {fileID: 0}
+      propertyPath: krzyz
+      value: 
+      objectReference: {fileID: 188834, guid: 2d198e40dd2cf244d9f5df5b7e9227e5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 139000}
