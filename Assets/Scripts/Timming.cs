@@ -13,6 +13,7 @@ public class Timming : MonoBehaviour
     public float SecondsToWin;
 
     private Material _material;
+    private bool _juzPo = false;
 
     // Use this for initialization
     private void Start()
@@ -24,6 +25,7 @@ public class Timming : MonoBehaviour
         _material.SetFloat("_ScreenHeight", Screen.height);
 
         _currenTimming = this;
+        _juzPo = false;
     }
 
     private void OnDestroy()
@@ -41,13 +43,18 @@ public class Timming : MonoBehaviour
         if (realTime < 0)
             realTime = 0;
 
-        if (SecondsToWin > 0 && realTime >= SecondsToWin + CooldownAfter)
+        if (!_juzPo)
         {
-            GameManager.Instance.NextLevel();
-        }
-        if (SecondsToLoose > 0 && realTime >= SecondsToLoose + CooldownAfter)
-        {
-            GameManager.Instance.GameOver();
+            if (SecondsToWin > 0 && realTime >= SecondsToWin + CooldownAfter)
+            {
+                _juzPo = true;
+                GameManager.Instance.NextLevel();
+            }
+            if (SecondsToLoose > 0 && realTime >= SecondsToLoose + CooldownAfter)
+            {
+                _juzPo = true;
+                GameManager.Instance.GameOver();
+            }
         }
 
         float pos = Position;

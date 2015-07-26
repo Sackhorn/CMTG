@@ -21,6 +21,9 @@ public class Papierek_Manager_Script : MonoBehaviour
     private int maxPapiereksOnScene;
     private int score;
 
+    private bool _juzPoSeksie = false;
+    private bool _juzPoDeadzie = false;
+
     public static Papierek_Manager_Script instance()
     {
         return Instance;
@@ -28,6 +31,9 @@ public class Papierek_Manager_Script : MonoBehaviour
 
     private void Awake()
     {
+        _juzPoSeksie = false;
+        _juzPoDeadzie = false;
+
         if (Instance)
             Destroy(gameObject);
         else
@@ -65,12 +71,12 @@ public class Papierek_Manager_Script : MonoBehaviour
         bool isPapierekBad = RandBool();
         if (isPapierekBad)
         {
-            Debug.Log("Nowy Papierek jest generowany");
+           // Debug.Log("Nowy Papierek jest generowany");
             Instantiate(BadPapierek, papiereksPosition, Quaternion.identity);
         }
         else
         {
-            Debug.Log("Nowy Papierek jest generowany");
+           // Debug.Log("Nowy Papierek jest generowany");
             Instantiate(GoodPapierek, papiereksPosition, Quaternion.identity);
         }
     }
@@ -99,14 +105,15 @@ public class Papierek_Manager_Script : MonoBehaviour
                     StartTimer();
                 }
             }
-            else
+            else if (!_juzPoSeksie)
             {
                 Debug.Log("Spierdalaj do innej sceny");
+                _juzPoSeksie = true;
                 GameManager.Instance.NextLevel();
             }
 
         }
-        else
+        else if (!_juzPoDeadzie)
         {
             if (areYouDead)
             {
@@ -115,6 +122,7 @@ public class Papierek_Manager_Script : MonoBehaviour
             }
             areYouDead = false;
             Debug.Log("Dedłeś");
+            _juzPoDeadzie = true;
             GameManager.Instance.GameOver();
         }
 
