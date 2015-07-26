@@ -1,100 +1,82 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(Camera))]
 public class Fade : MonoBehaviour
 {
-    public Shader Shader = null;
+    public float FadeInTime = 1.5f;
+    public float FadeOutTime = 1.5f;
 
-    private Material ccMaterial;
-    private float _fade;
-    private string NextLevelName;
-    private float FadeTime;
-    
+    private float _fadeInAcc;
+    private float _fadeOutAcc;
+    private string _nextLevelName;
+
+    private bool _fadeIn;
+    private bool _fadeOut;
+
+    private Image _image;
+
     // Use this for initialization
     private void Start()
     {
-        _fade = 0.0f;
-        NextLevelName = null;
-
-        ccMaterial = CheckShaderAndCreateMaterial(Shader, ccMaterial);
-    }
-
-    protected Material CheckShaderAndCreateMaterial(Shader s, Material m2Create)
-    {
-        if (!s)
-        {
-            Debug.Log("Missing shader in " + ToString());
-            enabled = false;
-            return null;
-        }
-
-        if (s.isSupported && m2Create && m2Create.shader == s)
-            return m2Create;
-
-        if (!s.isSupported)
-        {
-            Debug.Log("The shader " + s.ToString() + " on effect " + ToString() + " is not supported on this platform!");
-            return null;
-        }
-        else
-        {
-            m2Create = new Material(s);
-            m2Create.hideFlags = HideFlags.DontSave;
-            if (m2Create)
-                return m2Create;
-            else return null;
-        }
+        _fadeInAcc = 0.0f;
+        _fadeOutAcc = 0.0f;
+        _nextLevelName = null;
+        _fadeIn = true;
+        _fadeOut = false;
+        _image = gameObject.GetComponent<Image>();
     }
 
     private void Update()
     {
-        if (NextLevelName != null)
+        if (_fadeIn)
         {
-            _fade += Time.deltaTime;
+            _fadeInAcc += Time.deltaTime;
+            _image.color = new Color(0, 0, 0, 1 - _fadeInAcc / FadeInTime);
 
-            if (_fade >= FadeTime)
+            if (_fadeInAcc >= FadeInTime)
             {
-                var toLoad = NextLevelName;
-                NextLevelName = null;
-
-                _fade = 1.0f;
-                Camera.main.cullingMask = 0;
-
-#if UNITY_EDITOR
-                //Debug.LogWarning("Loading: " + toLoad);
-#endif
-                Application.LoadLevel(toLoad);
+                _fadeIn = false;
+                gameObject.SetActive(false);
             }
         }
+        else if (_fadeOut)
+        {
+            _fadeOutAcc += Time.deltaTime;
+            _image.color = new Color(0, 0, 0, _fadeOutAcc / FadeOutTime);
 
-        ccMaterial.SetFloat("_pos", _fade / FadeTime);
+            if (_fadeOutAcc >= FadeOutTime)
+            {
+                _fadeOut = false;
+                Application.LoadLevel(_nextLevelName);
+            }
+        }
     }
 
-    private void OnRenderImage(RenderTexture source, RenderTexture destination)
+    private void startFadeOut(string sceneName)
     {
-        if (_fade == 0)
-            Graphics.Blit(source, destination);
-        else
-            Graphics.Blit(source, destination, ccMaterial);
+        _fadeOut = true;
+        _nextLevelName = sceneName;
+        gameObject.SetActive(true);
     }
 
-    public static void FadeThisSit(string nextScene, float fadeTime = 1.0f)
+    public static void FadeThisSit(string nextScene)
     {
         // Hide UI
         var ui = GameObject.Find("UI");
-        if(ui != null)
+        if (ui != null)
         {
-            ui.SetActive(false);
+            var fade = ui.transform.Find("Fade");
+            if (fade != null)
+            {
+                fade.GetComponent<Fade>().startFadeOut(nextScene);
+                return;
+            }
         }
 
-        // Start fade
-        var cam = GameObject.Find("Camera");
-        if (cam == null)
-        {
-            throw new MissingComponentException("Missing game object Camera");
-        }
-        var fade = cam.GetComponent<Fade>();
-        fade.NextLevelName = nextScene;
-        fade.FadeTime = fadeTime;
+        // No fade just go! Go!
+        Application.LoadLevel(nextScene);
+
+        // Error
+        //Debug.LogError("Cannot fade into another scene. Missing fade canvas.");
     }
 }
