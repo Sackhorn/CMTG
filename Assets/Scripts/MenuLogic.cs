@@ -11,7 +11,8 @@ public class MenuLogic : MonoBehaviour
     public void doIt()
 	{
         //Fade.FadeThisSit("WakeMeUp", 2.0f);
-        GameManager.Instance.NextLevel();
+        //GameManager.Instance.NextLevel();
+        GameManager.Instance.ShowStory(0);
 	}
 
 	public void dontDoIt()

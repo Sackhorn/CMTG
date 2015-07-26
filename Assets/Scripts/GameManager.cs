@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 	private int _currentLevel = -1;
 	private int _currentDay;
 
+    public int LastStoryIndex;
+
 	public static bool isActive
 	{
 		get { return _instance != null; }
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        LastStoryIndex = -1;
+
         ResetData();
 
         // get current level
@@ -134,6 +138,13 @@ public class GameManager : MonoBehaviour
 		_score += gain;
 	}
 
+    public void ShowStory(int storyIndex)
+    {
+        LastStoryIndex = storyIndex;
+        Camera.main.cullingMask = 0;
+        Application.LoadLevel("StoryText");
+    }
+
 	public struct LevelDesc
 	{
 		/// <summary>
@@ -191,4 +202,11 @@ public class GameManager : MonoBehaviour
 			}
 		},
 	};
+
+    public string[] Stories = new[]
+    {
+        @"Who: CorpoMan
+Where: City
+Target: survive, earn money, sleep",
+    };
 }
