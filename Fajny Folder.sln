@@ -1,6 +1,8 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
+Project("{E364E12B-98BE-0672-6CDE-CF2D7D017DAE}") = "Fajny Folder", "Assembly-CSharp-firstpass.csproj", "{6AA29FE1-6E0E-F76E-9F2D-9BC91752CA23}"
+EndProject
 Project("{E364E12B-98BE-0672-6CDE-CF2D7D017DAE}") = "Fajny Folder", "Assembly-CSharp.csproj", "{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6AA29FE1-6E0E-F76E-9F2D-9BC91752CA23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AA29FE1-6E0E-F76E-9F2D-9BC91752CA23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AA29FE1-6E0E-F76E-9F2D-9BC91752CA23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AA29FE1-6E0E-F76E-9F2D-9BC91752CA23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A83CDDE-474C-6A86-A98B-3F0FCFEDE27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -17,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-					GlobalSection(MonoDevelopProperties) = preSolution
+									GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
