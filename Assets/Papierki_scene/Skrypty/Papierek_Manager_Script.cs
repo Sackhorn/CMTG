@@ -5,6 +5,7 @@ using Random =UnityEngine.Random;
 
 public class Papierek_Manager_Script : MonoBehaviour
 {
+	public int day;
 	public Sprite sprajt;
     private bool areYouDead;
 	public float timeTillNextScene;
@@ -33,6 +34,23 @@ public class Papierek_Manager_Script : MonoBehaviour
 
     private void Awake()
     {
+
+		papierkiNumb = (int)System.Math.Pow (2, GameManager.Instance._currentDay)+2;
+		minApperanceTime = 0.5f - 0.04f * GameManager.Instance._currentDay;
+		maxApperanceTime = 1f - 0.04f * GameManager.Instance._currentDay;
+		lifesLeft = 3;
+		BadPapierekProbabiity = 0.35f;
+		papierekLifeSpan = 1f - GameManager.Instance._currentDay * 0.05f;
+
+		if (minApperanceTime <= 0.06f)
+			minApperanceTime = 0.1f;
+		if (minApperanceTime <= 0.5f)
+			minApperanceTime = 0.5f;
+		if (papierekLifeSpan <= 0.3f)
+			papierekLifeSpan = 0.5f;
+
+
+
         if (Instance)
             Destroy(gameObject);
         else
