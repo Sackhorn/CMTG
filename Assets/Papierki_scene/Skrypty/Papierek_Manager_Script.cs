@@ -128,12 +128,11 @@ public class Papierek_Manager_Script : MonoBehaviour
                     StartTimer();
                 }
             }
-            else
+            else 
             {
                 Debug.Log("Spierdalaj do innej sceny");
 				StartCoroutine(NextScene());
             }
-
         }
         else
         {
