@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
 	private int _clicks;
 	private int _score;
 	private int _currentLevel = -1;
-	private int _currentDay;
+	public int _currentDay;
+
+	public int LastStoryIndex;
 
 	public static bool isActive
 	{
@@ -21,7 +23,7 @@ public class GameManager : MonoBehaviour
 		{
 			if (_instance == null)
 			{
-				_instance = Object.FindObjectOfType(typeof(GameManager)) as GameManager;
+				_instance = Object.FindObjectOfType<GameManager>();
 
 				if (_instance == null)
 				{
@@ -43,9 +45,23 @@ public class GameManager : MonoBehaviour
 		get { return _score; }
 	}
 
-	private void OnAwake()
+	private void Awake()
 	{
+		LastStoryIndex = -1;
+
 		ResetData();
+
+		// get current level
+		for (int i = 0; i < Levels.Length; i++)
+		{
+			if (Levels[i].Name == Application.loadedLevelName)
+			{
+				_currentLevel = i;
+				break;
+			}
+		}
+		
+		Debug.LogWarning("Awake: " + Application.loadedLevelName + ", id: " + _currentLevel);
 	}
 
 	private void Update()
@@ -73,41 +89,26 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Create timming slider
-	/// </summary>
-	/// <param name="secondsToLoose">Amount of seconds to game over (-1 to disable)</param>
-	/// <param name="secondsToWin">Amount of seconds to win a level (-1 to disable)</param>
-	/// <param name="cooldownBefore">Amount of seconds before timer start</param>
-	/// <param name="cooldownAfter">Amount of seconds before timer end</param>
-	public void StartMiniGame(float secondsToLoose, float secondsToWin, float cooldownBefore, float cooldownAfter)
-	{
-		Object prefab = Resources.Load("Timming");
-		GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
-		var timming = go.GetComponent<Timming>();
-		timming.SecondsToWin = secondsToWin;
-		timming.CooldownAfter = cooldownAfter;
-		timming.CooldownBefore = cooldownBefore;
-		timming.SecondsToLoose = secondsToLoose;
-	}
-
 	public void GameOver()
 	{
 		_currentLevel = -1;
-		Fade.FadeThisSit("gameKurwaOver", 0.4f);
+		Debug.LogWarning("GameOver");
+		Fade.FadeThisSit("gameKurwaOver");
 	}
 
 	public void NextLevel()
 	{
 		_currentLevel++;
 
-        if (_currentLevel >= Levels.Length)
+		if (_currentLevel >= Levels.Length)
 		{
 			_currentLevel = 0;
 			_currentDay++;
 		}
 
-		Fade.FadeThisSit(Levels[_currentLevel].Name, Levels[_currentLevel].FadeTime);
+		Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
+
+		Fade.FadeThisSit(Levels[_currentLevel].Name);//, Levels[_currentLevel].FadeTime);
 	}
 
 	public void ResetData()
@@ -135,6 +136,30 @@ public class GameManager : MonoBehaviour
 	public void AddScore(int gain)
 	{
 		_score += gain;
+	}
+
+	public void ShowStory(int storyIndex)
+	{
+		LastStoryIndex = storyIndex;
+
+		if (_currentDay == 0)
+		{
+			Fade.FadeThisSit("StoryText");
+			//Camera.main.cullingMask = 0;
+			//Application.LoadLevel("StoryText");
+		}
+		else
+		{
+			NextLevel();
+		}
+	}
+
+	public void NextStory()
+	{
+
+		LastStoryIndex = _currentLevel;
+		Camera.main.cullingMask = 0;
+		Application.LoadLevel("StoryText");
 	}
 
 	public struct LevelDesc
@@ -193,5 +218,12 @@ public class GameManager : MonoBehaviour
 				0.0f
 			}
 		},
+	};
+
+	public string[] Stories = new[]
+	{
+		@"Who: CorpoMan
+Where: Each City
+Target: wake up, earn money, survive",
 	};
 }

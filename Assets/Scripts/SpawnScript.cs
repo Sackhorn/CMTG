@@ -12,8 +12,34 @@ public class SpawnScript : MonoBehaviour
 
     public float off = 0;
 
+    struct Config
+    {
+        float min;
+        float max;
+        float spawnTime;
+
+        public Config(float m_min, float m_max, float m_spawnTime)
+        {
+            min = m_min;
+            max = m_max;
+            spawnTime = m_spawnTime;
+
+        }
+
+    }
+
+    private Config[] dayConfig = {
+        new Config()
+
+
+    };
     // Use this for initialization
     private void Start()
+    {
+        DayConfigurator(GameManager.Instance._currentDay);
+    }
+
+    private void DayConfigurator(int dayNumber)
     {
 
     }

@@ -77,28 +77,28 @@ public class Papierek_Manager_Script : MonoBehaviour
 	}
 
     private void GenerateNewPapierek()
-	{	
+    {
 		GameObject tmp;
 		RandPapierek ();
-		float posX = tablica.transform.position.x;
-		float posY = tablica.transform.position.y;
-		float tabWidth = tablica.bounds.size.x;
-		float tabHeight = tablica.bounds.size.y;
+        float posX = tablica.transform.position.x;
+        float posY = tablica.transform.position.y;
+        float tabWidth = tablica.bounds.size.x;
+        float tabHeight = tablica.bounds.size.y;
 		float width = Random.Range (posX - tabWidth / 2 + 20, posX + tabWidth / 2 - 20);
 		float height = Random.Range (posY - tabHeight / 2 + 15, posY + tabHeight / 2 - 15);
 		Vector2 papiereksPosition = new Vector2 (width, height);
 		bool isPapierekBad = RandBool ();
-		if (isPapierekBad) 
-		{
+        if (isPapierekBad)
+        {
 
 			Debug.Log ("Nowy Papierek jest generowany");
 			tmp = (GameObject)Instantiate (BadPapierek, papiereksPosition, Quaternion.identity);
-		} 
-		else 
-		{
+        }
+        else
+        {
 			Debug.Log ("Nowy Papierek jest generowany");
 			tmp = (GameObject)Instantiate (GoodPapierek, papiereksPosition, Quaternion.identity);
-		}
+    }
 		GameObject obj=GameObject.Find("tablica");
 		tmp.transform.parent=obj.transform;
 
@@ -128,12 +128,11 @@ public class Papierek_Manager_Script : MonoBehaviour
                     StartTimer();
                 }
             }
-            else
+            else 
             {
                 Debug.Log("Spierdalaj do innej sceny");
 				StartCoroutine(NextScene());
             }
-
         }
         else
         {
@@ -147,13 +146,13 @@ public class Papierek_Manager_Script : MonoBehaviour
 			StartCoroutine(KillScene());
         }
 
-    }
+        }
 
 	private IEnumerator KillScene()
 	{
 		yield return new WaitForSeconds (10);
 		GameManager.Instance.GameOver();
-	}
+    }
 
 	public IEnumerator NextScene()
 	{
@@ -166,7 +165,7 @@ public class Papierek_Manager_Script : MonoBehaviour
 		StartCoroutine (GameObject.Find ("Player").GetComponent<Player_Script> ().KickPlyaer ());
 		//StartCoroutine(GameObject.Find ("Player").GetComponent<Player_Script> ().AnimatePlayer());
 		//GameObject.Find ("Player").GetComponent<SpriteRenderer> ().sprite = sprajt;
-		
+
 		yield return new WaitForSeconds (timeTillNextScene);
 		GameManager.Instance.NextLevel();
 	}

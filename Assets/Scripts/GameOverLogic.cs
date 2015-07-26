@@ -21,6 +21,6 @@ public class GameOverLogic : MonoBehaviour
 	public void backToMenu()
 	{
 	    GameManager.Instance.ResetData();
-		Fade.FadeThisSit("menu", 0.8f);
+		Fade.FadeThisSit("menu");
 	}
 }
