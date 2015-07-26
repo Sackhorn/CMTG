@@ -47,7 +47,7 @@ public class WakeMeUp : MonoBehaviour
 
     private void DayConfigurator(int dayNumber)
     {
-
+        MoveUpSpeed = MoveUpSpeed - (dayNumber * 0.2f);
     }
 
     public IEnumerator StartGame()
