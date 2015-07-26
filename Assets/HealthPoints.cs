@@ -49,7 +49,8 @@ public class HealthPoints : MonoBehaviour
 
        // Debug.LogWarning("ssssssssssssssssss");
 
-        GameManager.Instance.NextLevel();
+        //GameManager.Instance.NextLevel();
+        GameManager.Instance.ShowStory(4);
     }
 
 	// Update is called once per frame

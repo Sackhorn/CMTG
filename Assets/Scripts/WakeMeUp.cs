@@ -108,9 +108,10 @@ public class WakeMeUp : MonoBehaviour
         iTween.MoveTo(obj, new Vector3(140, -39, 0), 2.0f);
         obj.GetComponent<Animator>().SetTrigger("trigger");
 
-        yield return new WaitForSeconds(animTime);
+        yield return new WaitForSeconds(animTime - 1f);
 
-        GameManager.Instance.NextLevel();
+        //GameManager.Instance.NextLevel();
+        GameManager.Instance.ShowStory(2);
     }
 
     void onFinish()

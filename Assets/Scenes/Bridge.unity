@@ -246,7 +246,7 @@ MonoBehaviour:
   stroke: {fileID: 1571366578}
   playerManager: {fileID: 2040086283}
   secondsToChange: 0
-  secondsToStart: 1
+  secondsToStart: 2.79999995
   minTime: 1
   maxTime: 5
   speed: 50
@@ -429,6 +429,14 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 175c35482691fc54d939755de50a9076, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &640369273 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 182478, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+  m_PrefabInternal: {fileID: 1827641912}
+--- !u!4 &640369274 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+  m_PrefabInternal: {fileID: 1827641912}
 --- !u!1 &838178845
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,10 +1010,69 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 452604, guid: 50e73242af487664399d9fd629479ec5, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50e73242af487664399d9fd629479ec5, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1827641912
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2043993538}
+    m_Modifications:
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -197
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -160.960007
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 431176, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 21253210, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a509b74023e164145944afb09ebbc650,
+        type: 3}
+    - target: {fileID: 430762, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.06599998
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 25a35432bc248a545810af8bdebcbed5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1878687162
 GameObject:
@@ -1098,7 +1165,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 454102, guid: 175c35482691fc54d939755de50a9076, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 21241726, guid: 175c35482691fc54d939755de50a9076, type: 2}
       propertyPath: m_Color.r
@@ -1199,6 +1266,7 @@ MonoBehaviour:
   angleToFall: 20
   timeToFall: 0
   kupa: 2
+  Info: {fileID: 640369273}
 --- !u!50 &2040086284
 Rigidbody2D:
   serializedVersion: 2
@@ -1284,7 +1352,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20, y: -145.199997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 640369274}
   m_Father: {fileID: 0}
   m_RootOrder: 10
 --- !u!95 &2043993539
