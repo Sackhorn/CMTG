@@ -83,35 +83,46 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown(KeyCode.RightAlt))
+		/*if (Input.GetKeyDown(KeyCode.RightAlt))
 		{
 			NextLevel();
-		}
+		}*/
 	}
 
 	public void GameOver()
 	{
+        StopAllCoroutines();
 		_currentLevel = -1;
 		Debug.LogWarning("GameOver");
 		Fade.FadeThisSit("gameKurwaOver");
 	}
 
-	public void NextLevel()
-	{
-		_currentLevel++;
+    public void NextLevel()
+    {
+        StopAllCoroutines();
 
-		if (_currentLevel >= Levels.Length)
-		{
-			_currentLevel = 0;
-			_currentDay++;
-		}
 
-		Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
+        _currentLevel++;
 
-		Fade.FadeThisSit(Levels[_currentLevel].Name);//, Levels[_currentLevel].FadeTime);
-	}
+        if (_currentLevel >= Levels.Length)
+        {
+            _currentLevel = -1;
+            _currentDay++;
 
-	public void ResetData()
+            ShowStory(1);
+
+            return;
+
+        }
+
+
+
+        Debug.LogWarning("NextLevel: " + Levels[_currentLevel].Name + ", id: " + _currentLevel);
+
+        Fade.FadeThisSit(Levels[_currentLevel].Name);//, Levels[_currentLevel].FadeTime);
+    }
+
+    public void ResetData()
 	{
 		_score = 0;
 		_clicks = 0;
@@ -131,30 +142,36 @@ public class GameManager : MonoBehaviour
 	public void AddScore(float gain)
 	{
 		_score += (int)gain;
+
+	    if (_score < 0)
+	        _score = 0;
 	}
 
 	public void AddScore(int gain)
 	{
 		_score += gain;
+
+        if (_score < 0)
+            _score = 0;
 	}
 
-	public void ShowStory(int storyIndex)
-	{
-		LastStoryIndex = storyIndex;
+    public void ShowStory(int storyIndex)
+    {
+        LastStoryIndex = storyIndex;
 
-		if (_currentDay == 0)
-		{
-			Fade.FadeThisSit("StoryText");
-			//Camera.main.cullingMask = 0;
-			//Application.LoadLevel("StoryText");
-		}
-		else
-		{
-			NextLevel();
-		}
-	}
+        if (_currentDay == 0 || storyIndex == 1)
+        {
+            Fade.FadeThisSit("StoryText");
+            //Camera.main.cullingMask = 0;
+            //Application.LoadLevel("StoryText");
+        }
+        else
+        {
+            NextLevel();
+        }
+    }
 
-	public void NextStory()
+    public void NextStory()
 	{
 
 		LastStoryIndex = _currentLevel;
@@ -222,8 +239,27 @@ public class GameManager : MonoBehaviour
 
 	public string[] Stories = new[]
 	{
+        //0
 		@"Who: CorpoMan
-Where: Each City
-Target: wake up, earn money, survive",
+Mission: survive
+
+Just do it",
+           //1
+           @"Survived
+Day: ",
+           //2
+           @"earn
+your
+living",
+       //3
+       @"After hard day at work
+It's time to find some love
+
+<3",
+       //4
+       @"Good dance!
+but not this time
+
+never give up. dont jump"
 	};
 }

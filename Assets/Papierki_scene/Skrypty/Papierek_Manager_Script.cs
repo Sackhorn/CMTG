@@ -7,35 +7,42 @@ public class Papierek_Manager_Script : MonoBehaviour
 {
 	public int day;
 	public Sprite sprajt;
-    private bool areYouDead;
+	private bool areYouDead;
 	public float timeTillNextScene;
-    public float papierekLifeSpan;
-    public int papierkiCount = 0;
-    public int papierkiNumb = 5;
-    public int lifesLeft = 3;
-    public static Papierek_Manager_Script Instance;
-    public float minApperanceTime = 0.3f;
-    public float maxApperanceTime = 2f;
-    public float nextApperance = 1f;
-  	GameObject GoodPapierek;
+	public float papierekLifeSpan;
+	public int papierkiCount = 0;
+	public int papierkiNumb = 5;
+	public int lifesLeft = 3;
+	public static Papierek_Manager_Script Instance;
+	public float minApperanceTime = 0.3f;
+	public float maxApperanceTime = 2f;
+	public float nextApperance = 1f;
+	GameObject GoodPapierek;
 	public GameObject GoodPapierek_1;
 	public GameObject GoodPapierek_2;
 	public GameObject GoodPapierek_3;
-    public GameObject BadPapierek;
-    public SpriteRenderer tablica;
-    public float BadPapierekProbabiity = 0.5f;
-    private int maxPapiereksOnScene;
-    private int score;
+	public GameObject BadPapierek;
+	public SpriteRenderer tablica;
+	public float BadPapierekProbabiity = 0.5f;
+	private int maxPapiereksOnScene;
+	private int score;
 
-    public static Papierek_Manager_Script instance()
-    {
-        return Instance;
-    }
+	private bool dead;
+	private bool win;
 
-    private void Awake()
-    {
 
-		papierkiNumb = (int)System.Math.Pow (2, GameManager.Instance._currentDay)+2;
+	public static Papierek_Manager_Script instance()
+	{
+		return Instance;
+	}
+
+	private void Awake()
+	{
+		dead = false;
+		win = false;
+
+
+		papierkiNumb = (int)System.Math.Pow (2, GameManager.Instance._currentDay)+3;
 		minApperanceTime = 0.5f - 0.04f * GameManager.Instance._currentDay;
 		maxApperanceTime = 1f - 0.04f * GameManager.Instance._currentDay;
 		lifesLeft = 3;
@@ -51,30 +58,30 @@ public class Papierek_Manager_Script : MonoBehaviour
 
 
 
-        if (Instance)
-            Destroy(gameObject);
-        else
-        {
-            areYouDead = true;
-            Instance = this;
-        }
-        //Sprite.Create (Tlo, new Rect (), new Vector2 (0, 0));
-    }
+		if (Instance)
+			Destroy(gameObject);
+		else
+		{
+			areYouDead = true;
+			Instance = this;
+		}
+		//Sprite.Create (Tlo, new Rect (), new Vector2 (0, 0));
+	}
 
 
-    private void StartTimer()
-    {
-        nextApperance = Random.Range(minApperanceTime, maxApperanceTime);
-    }
+	private void StartTimer()
+	{
+		nextApperance = Random.Range(minApperanceTime, maxApperanceTime);
+	}
 
-    private bool RandBool()
-    {
-        float tmp = Random.Range(0f, 1f);
-        if (tmp < BadPapierekProbabiity)
-            return true;
-        else
-            return false;
-    }
+	private bool RandBool()
+	{
+		float tmp = Random.Range(0f, 1f);
+		if (tmp < BadPapierekProbabiity)
+			return true;
+		else
+			return false;
+	}
 
 	void RandPapierek()
 	{
@@ -94,83 +101,85 @@ public class Papierek_Manager_Script : MonoBehaviour
 		}
 	}
 
-    private void GenerateNewPapierek()
-    {
+	private void GenerateNewPapierek()
+	{
 		GameObject tmp;
 		RandPapierek ();
-        float posX = tablica.transform.position.x;
-        float posY = tablica.transform.position.y;
-        float tabWidth = tablica.bounds.size.x;
-        float tabHeight = tablica.bounds.size.y;
+		float posX = tablica.transform.position.x;
+		float posY = tablica.transform.position.y;
+		float tabWidth = tablica.bounds.size.x;
+		float tabHeight = tablica.bounds.size.y;
 		float width = Random.Range (posX - tabWidth / 2 + 20, posX + tabWidth / 2 - 20);
 		float height = Random.Range (posY - tabHeight / 2 + 15, posY + tabHeight / 2 - 15);
 		Vector2 papiereksPosition = new Vector2 (width, height);
 		bool isPapierekBad = RandBool ();
-        if (isPapierekBad)
-        {
+		if (isPapierekBad)
+		{
 
-			Debug.Log ("Nowy Papierek jest generowany");
+			///Debug.Log ("Nowy Papierek jest generowany");
 			tmp = (GameObject)Instantiate (BadPapierek, papiereksPosition, Quaternion.identity);
-        }
-        else
-        {
-			Debug.Log ("Nowy Papierek jest generowany");
+		}
+		else
+		{
+			//Debug.Log ("Nowy Papierek jest generowany");
 			tmp = (GameObject)Instantiate (GoodPapierek, papiereksPosition, Quaternion.identity);
-    }
+	}
 		GameObject obj=GameObject.Find("tablica");
 		tmp.transform.parent=obj.transform;
 
 
 	}
-    private IEnumerator PaperCut()
-    {
-        for (int i = 0; i < 100; i++)
-        {
-            yield return new WaitForSeconds(0.05f);
-            GenerateNewPapierek();
+	private IEnumerator PaperCut()
+	{
+		for (int i = 0; i < 100; i++)
+		{
+			yield return new WaitForSeconds(0.05f);
+			GenerateNewPapierek();
 
-        }
-    }
+		}
+	}
 
-    private void Update()
-    {
-        if (lifesLeft > 0)
-        {
-            if (papierkiCount < papierkiNumb)
-            {
-                nextApperance -= Time.deltaTime;
+	private void Update()
+	{
+		if (lifesLeft > 0)
+		{
+			if (papierkiCount < papierkiNumb)
+			{
+				nextApperance -= Time.deltaTime;
 
-                if (nextApperance <= 0)
-                {
-                    GenerateNewPapierek();
-                    StartTimer();
-                }
-            }
-            else 
-            {
-                Debug.Log("Spierdalaj do innej sceny");
+				if (nextApperance <= 0)
+				{
+					GenerateNewPapierek();
+					StartTimer();
+				}
+			}
+			else if(!win)
+			{
+				win = true;
+				Debug.Log("Spierdalaj do innej sceny");
 				StartCoroutine(NextScene());
-            }
-        }
-        else
-        {
-            if (areYouDead)
-            {
-                StartCoroutine(PaperCut());
-                papierekLifeSpan = 20.0f;
-            }
-            areYouDead = false;
-            Debug.Log("Dedłeś");
+			}
+		}
+		else if(!dead)
+		{
+			dead = true;
+			if (areYouDead)
+			{
+				StartCoroutine(PaperCut());
+				papierekLifeSpan = 20.0f;
+			}
+			areYouDead = false;
+			Debug.Log("Dedłeś");
 			StartCoroutine(KillScene());
-        }
+		}
 
-        }
+		}
 
 	private IEnumerator KillScene()
 	{
-		yield return new WaitForSeconds (10);
+		yield return new WaitForSeconds (4);
 		GameManager.Instance.GameOver();
-    }
+	}
 
 	public IEnumerator NextScene()
 	{
@@ -188,6 +197,8 @@ public class Papierek_Manager_Script : MonoBehaviour
 
 		//yield return new WaitForSeconds (timeTillNextScene);
 		yield return  new WaitForSeconds(0.6f);
-		GameManager.Instance.NextLevel();
+
+		GameManager.Instance.ShowStory(3);
+		//GameManager.Instance.NextLevel();
 	}
 }
