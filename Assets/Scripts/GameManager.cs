@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 
 	private int _clicks;
 	private int _score;
-	private int _currentLevel = -1;
-	public int _currentDay;
+    public int _currentLevel = -1;
+    public int _currentDay;
 
 	public int LastStoryIndex;
 
@@ -83,10 +83,8 @@ public class GameManager : MonoBehaviour
 			}
 		}
 
-		/*if (Input.GetKeyDown(KeyCode.RightAlt))
-		{
+		if (Input.GetKeyDown(KeyCode.RightAlt))
 			NextLevel();
-		}*/
 	}
 
 	public void GameOver()

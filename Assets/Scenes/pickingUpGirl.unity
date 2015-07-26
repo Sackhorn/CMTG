@@ -224,7 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849ba901b4bf16343a0392fa4832b86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dancer: {fileID: 0}
 --- !u!61 &235233859
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -259,7 +258,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 452604, guid: 50e73242af487664399d9fd629479ec5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 24.6000004
+      value: 33.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 452604, guid: 50e73242af487664399d9fd629479ec5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -484,7 +483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849ba901b4bf16343a0392fa4832b86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dancer: {fileID: 0}
 --- !u!1 &1009074912
 GameObject:
   m_ObjectHideFlags: 0

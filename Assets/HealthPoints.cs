@@ -70,7 +70,10 @@ public class HealthPoints : MonoBehaviour
 	        time += Time.deltaTime;
 	        if (time >= spawnTime)
 	        {
-                var arrow = Instantiate(obj[Mathf.RoundToInt(Random.Range(min, max))], new Vector3(distance, 9, 0), Quaternion.identity) as GameObject;
+                var arrow = Instantiate(
+                    obj[Mathf.RoundToInt(Random.Range(min, max))],
+                     new Vector3(distance, 9, 0),
+                    Quaternion.identity) as GameObject;
                 arrow.GetComponent<ArrowMovement>().ArrowSpeed = ArrowSpeed;
 	            time = 0;
 	        }

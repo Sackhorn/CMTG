@@ -4,14 +4,14 @@ using System.Collections;
 public class WakeMeUp : MonoBehaviour
 {
 	public GameObject Head;
-    public GameObject Budzik;
+	public GameObject Budzik;
 	public Sprite setSprite;
 	public GameObject obj;
-    public GameObject AnimBudzika;
+	public GameObject AnimBudzika;
 
-    public float MoveDownSpeed = 0.15f;
-    public float MoveUpSpeed = 0.3f;
-    public float cooldown = 3;
+	public float MoveDownSpeed = 0.15f;
+	public float MoveUpSpeed = 0.3f;
+	public float cooldown = 3;
 
 	private GameObject _leftEye;
 	private GameObject _rightEye;
@@ -25,13 +25,17 @@ public class WakeMeUp : MonoBehaviour
 
 	private const float _eyesHeight = 7.2f;
 
-    private bool _isRunning;
+	private bool _isRunning;
 
 	public float animTime;
 	// Use this for initialization
 	private void Start()
 	{
-	    _isRunning = false;
+		  MoveDownSpeed = 0.11f;
+		MoveUpSpeed = 1.2f;//0.3f;
+			cooldown = 3;
+
+		_isRunning = false;
 
 		// cache objects
 		_leftEye = Head.transform.FindChild("LeftEye").gameObject;
@@ -45,114 +49,114 @@ public class WakeMeUp : MonoBehaviour
 		_leftEyePos = 0;
 		_rightEyePos = 0;
 
-        DayConfigurator(GameManager.Instance._currentDay);
-       AnimBudzika.GetComponent<Animator>().enabled = false;
+		//DayConfigurator(GameManager.Instance._currentDay);
+	   AnimBudzika.GetComponent<Animator>().enabled = false;
 
-        StartCoroutine("StartGame");
+		StartCoroutine("StartGame");
 	}
 
-    private void DayConfigurator(int dayNumber)
-    {
-        MoveUpSpeed = MoveUpSpeed - (dayNumber * 0.02f);
-    }
+	private void DayConfigurator(int dayNumber)
+	{
+		//MoveUpSpeed = MoveUpSpeed - (dayNumber * 0.02f);
+	}
 
-    public IEnumerator StartGame()
-    {
-        yield return new WaitForSeconds(1);
+	public IEnumerator StartGame()
+	{
+		yield return new WaitForSeconds(1);
 
-        Budzik.GetComponent<AudioSource>().Play();
-        AnimBudzika.GetComponent<Animator>().enabled = true;
+		Budzik.GetComponent<AudioSource>().Play();
+		AnimBudzika.GetComponent<Animator>().enabled = true;
 
-        var myszka = Head.transform.FindChild("myszka");
-        var pos = myszka.localPosition;
-        myszka.localPosition = new Vector3(pos.x, -60, 0);
+		var myszka = Head.transform.FindChild("myszka");
+		var pos = myszka.localPosition;
+		myszka.localPosition = new Vector3(pos.x, -60, 0);
 
-        yield return new WaitForSeconds(cooldown - 1);
+		yield return new WaitForSeconds(cooldown - 1);
 
 		// Start timming
-        iTween.MoveTo(Head, new Vector3(0, 53, 0), 1.0f);
-        Budzik.GetComponent<AudioSource>().volume = 0.4f;
+		iTween.MoveTo(Head, new Vector3(0, 53, 0), 1.0f);
+		Budzik.GetComponent<AudioSource>().volume = 0.4f;
 
-        while (myszka.localPosition.y < pos.y)
-        {
-            myszka.localPosition += new Vector3(0, 50 * Time.deltaTime, 0);
-            yield return new WaitForSeconds(0.005f);
-        }
+		while (myszka.localPosition.y < pos.y)
+		{
+			myszka.localPosition += new Vector3(0, 50 * Time.deltaTime, 0);
+			yield return new WaitForSeconds(0.005f);
+		}
 
-        yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(1.0f);
 
-        _isRunning = true;
-        Timming.Start(20.0f, onFinish);
+		_isRunning = true;
+		Timming.Start(20.0f, onFinish);
 
-        yield return new WaitForSeconds(1.0f);
-        myszka.gameObject.SetActive(false);
-    }
+		yield return new WaitForSeconds(1.0f);
+		myszka.gameObject.SetActive(false);
+	}
 
-    public IEnumerator WakeUpAnim()
-    {
-        Timming.Stop();
+	public IEnumerator WakeUpAnim()
+	{
+		Timming.Stop();
 
-        GameObject.Find("budzik1").GetComponent<Animator>().enabled = false;
-        GameObject.Find("budzik1").GetComponent<SpriteRenderer>().sprite = setSprite;
-        iTween.MoveTo(Head, new Vector3(1500, 0, 0), 2.0f);
+		GameObject.Find("budzik1").GetComponent<Animator>().enabled = false;
+		GameObject.Find("budzik1").GetComponent<SpriteRenderer>().sprite = setSprite;
+		iTween.MoveTo(Head, new Vector3(1500, 0, 0), 2.0f);
 
-        //yield return new WaitForSeconds(animTime);
+		//yield return new WaitForSeconds(animTime);
 
-        GameObject.Find("room").GetComponent<Animator>().enabled = true;
+		GameObject.Find("room").GetComponent<Animator>().enabled = true;
 
-        yield return new WaitForSeconds(0.9f);
+		yield return new WaitForSeconds(0.9f);
 
-        Debug.Log("kutas");
-        //obj.SetActive(true);
+		Debug.Log("kutas");
+		//obj.SetActive(true);
 
-        iTween.MoveTo(obj, new Vector3(140, -39, 0), 2.0f);
-        obj.GetComponent<Animator>().SetTrigger("trigger");
+		iTween.MoveTo(obj, new Vector3(140, -39, 0), 2.0f);
+		obj.GetComponent<Animator>().SetTrigger("trigger");
 
-        yield return new WaitForSeconds(animTime - 1f);
+		yield return new WaitForSeconds(animTime - 1f);
 
-        //GameManager.Instance.NextLevel();
-        GameManager.Instance.ShowStory(2);
-    }
+		//GameManager.Instance.NextLevel();
+		GameManager.Instance.ShowStory(2);
+	}
 
-    void onFinish()
-    {
-        GameManager.Instance.GameOver();
+	void onFinish()
+	{
+		GameManager.Instance.GameOver();
 
-    }
+	}
 
 	// Update is called once per frame
 	private void Update()
 	{
 		// check if update more
-        if (_rightEyePos == 100 || !_isRunning)
+		if (_rightEyePos == 100 || !_isRunning)
 			return;
 
 		// check input
 		if (Input.GetMouseButtonDown(0))
 		{
-            _leftEyePos += Time.deltaTime * MoveUpSpeed * (15 - _leftEyePos * 5);
+			_leftEyePos += Time.unscaledDeltaTime * MoveUpSpeed * (15 - _leftEyePos * 5);
 		}
 		if (Input.GetMouseButtonDown(1))
 		{
-            _rightEyePos += Time.deltaTime * MoveUpSpeed * (15 - _rightEyePos * 5);
+			_rightEyePos += Time.unscaledDeltaTime * MoveUpSpeed * (15 - _rightEyePos * 5);
 		}
 		
 		// check game finished event
-	    const float eyeIsUpWhen = 0.98f;
-        if (_rightEyePos >= eyeIsUpWhen && _leftEyePos >= eyeIsUpWhen)
+		const float eyeIsUpWhen = 0.98f;
+		if (_rightEyePos >= eyeIsUpWhen && _leftEyePos >= eyeIsUpWhen)
 		{
 			// Game won
-            Budzik.GetComponent<AudioSource>().Stop();
+			Budzik.GetComponent<AudioSource>().Stop();
 			_rightEyePos = 100;
-            GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
+			GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
 			StartCoroutine("WakeUpAnim");
-            
+			
 		}
 		else
 		{
 			// move eyes down
-            _leftEyePos -= MoveDownSpeed * Time.deltaTime;
-            _rightEyePos -= MoveDownSpeed * Time.deltaTime;
+			_leftEyePos -= MoveDownSpeed * Time.unscaledDeltaTime;
+			_rightEyePos -= MoveDownSpeed * Time.unscaledDeltaTime;
 
 			// clamp eyes
 			_leftEyePos = Mathf.Clamp01(_leftEyePos);
