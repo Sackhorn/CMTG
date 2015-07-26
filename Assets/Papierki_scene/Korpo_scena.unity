@@ -621,6 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faeeb4acf00a0954aa7f5c05dfd75172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  day: 0
   sprajt: {fileID: 21300000, guid: 64c6e84d0d1a5684180bf43a2d354a06, type: 3}
   timeTillNextScene: 6
   papierekLifeSpan: 1
