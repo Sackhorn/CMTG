@@ -3,3 +3,5 @@ Temp/*
 obj/*
 Output/*
 *.sln
+*.csproj
+*.orig
