@@ -442,11 +442,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 94680825}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 44, y: -15}
-  m_SizeDelta: {x: 943, y: 444.339996}
-  m_Pivot: {x: .5, y: .5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 55, y: -47}
+  m_SizeDelta: {x: 943, y: 444.339966}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &2125949951
 MonoBehaviour:
   m_ObjectHideFlags: 0
