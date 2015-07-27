@@ -10,7 +10,7 @@ public class CollideCheck : MonoBehaviour
     private bool _upA = false;
     private bool _downA = false;
     private GameObject obj;
-	public GameObject dancer;
+	//public GameObject dancer;
 
     private void Update()
     {
