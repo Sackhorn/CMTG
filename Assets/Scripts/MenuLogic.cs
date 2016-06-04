@@ -17,6 +17,10 @@ public class MenuLogic : MonoBehaviour
 
     private List<GameObject> chars;
 
+    private bool _firstChar = true;
+
+    private CharScript _choosenOne;
+
     private bool _doing;
 
     private void Start()
@@ -44,8 +48,13 @@ public class MenuLogic : MonoBehaviour
                 top.SetActive(true);
 
                 _time = 0;
-                chars.Add(Instantiate(CharPrefarb));
-
+                GameObject newChar = (GameObject)Instantiate(CharPrefarb);
+                chars.Add(newChar);
+                if(_firstChar)
+                {
+                    _choosenOne = newChar.GetComponent<CharScript>();
+                    _firstChar = false;
+                }
             }
         }
 
@@ -70,7 +79,16 @@ public class MenuLogic : MonoBehaviour
 
         foreach (var e in chars)
         {
-            e.SetActive(false);
+            CharScript c;
+            c = e.GetComponent<CharScript>();
+            if (c != _choosenOne)
+            {
+                c.Fade();
+            }
+            else
+            {
+                c.Anim();
+            }
         }
 
 
@@ -83,4 +101,9 @@ public class MenuLogic : MonoBehaviour
 	{
 	    GameManager.Instance.Exit();
 	}
+
+    public void addNewChoosenOne(GameObject n)
+    {
+        _choosenOne = n.GetComponent<CharScript>();
+    }
 }
