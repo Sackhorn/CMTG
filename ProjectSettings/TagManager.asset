@@ -14,6 +14,8 @@ TagManager:
   - border
   - Obstacle
   - Papierki_Manager
+  - EyeColliderTag
+  - New Tag
   layers:
   - Default
   - TransparentFX

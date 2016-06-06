@@ -8,46 +8,49 @@ public class WakeMeUp : MonoBehaviour
 	public Sprite setSprite;
 	public GameObject obj;
 	public GameObject AnimBudzika;
+    public GameObject timeBar;
+    public float gameTime = 20.0f;
 
-	public float MoveDownSpeed = 0.15f;
-	public float MoveUpSpeed = 0.3f;
-	public float cooldown = 3;
+
+    private float timmerWidth;
+    private bool isLeftEyeUp;
+    private bool isRightEyeUp;
+
+    private EyeColliderScript leftEyeScript;
+    private EyeColliderScript rightEyeScript;
+
+    private Rigidbody2D leftRigidBody;
+    private Rigidbody2D rightRigidBody;
 
 	private GameObject _leftEye;
 	private GameObject _rightEye;
 
-	// positions from 0 to 1
-	private float _leftEyePos;
-	private float _rightEyePos;
-
-	private Vector3 _leftEyeInitPos;
-	private Vector3 _rightEyeInitPos;
-
-	private const float _eyesHeight = 7.2f;
-
 	private bool _isRunning;
 
 	public float animTime;
-	// Use this for initialization
-	private void Start()
+    private bool gameWon;
+
+    // Use this for initialization
+    private void Start()
 	{
-		  MoveDownSpeed = 0.105f;
-		MoveUpSpeed = 1.5f;//0.3f;
-			cooldown = 3;
-
+        gameWon = false;
+        isLeftEyeUp = false;
+        isRightEyeUp = false;
 		_isRunning = false;
-
-		// cache objects
-		_leftEye = Head.transform.FindChild("LeftEye").gameObject;
+        timeBar.GetComponent<UnityEngine.UI.Image>().canvasRenderer.SetAlpha(0f);
+        var timeBarRectTrans = timeBar.transform as RectTransform;
+        timmerWidth = timeBarRectTrans.sizeDelta.x;
+        // cache objects
+        _leftEye = Head.transform.FindChild("LeftEye").gameObject;
 		_rightEye = Head.transform.FindChild("RightEye").gameObject;
 
-		// cache eyes init positions set via editor
-		_leftEyeInitPos = _leftEye.transform.localPosition;
-		_rightEyeInitPos = _rightEye.transform.localPosition;
+        //cache eye collider scripts
+        rightEyeScript = Head.transform.FindChild("RightTopCollider").GetComponent<EyeColliderScript>();
+        leftEyeScript = Head.transform.FindChild("LeftTopCollider").GetComponent<EyeColliderScript>();
 
-		// clear state
-		_leftEyePos = 0;
-		_rightEyePos = 0;
+        //get eye rigidBodies2D
+        rightRigidBody = Head.transform.FindChild("RightEye").GetComponent<Rigidbody2D>();
+        leftRigidBody = Head.transform.FindChild("LeftEye").GetComponent<Rigidbody2D>();
 
 		//DayConfigurator(GameManager.Instance._currentDay);
 	   AnimBudzika.GetComponent<Animator>().enabled = false;
@@ -71,7 +74,7 @@ public class WakeMeUp : MonoBehaviour
 		var pos = myszka.localPosition;
 		myszka.localPosition = new Vector3(pos.x, -60, 0);
 
-		yield return new WaitForSeconds(cooldown - 1);
+		yield return new WaitForSeconds(2);
 
 		// Start timming
 		iTween.MoveTo(Head, new Vector3(0, 53, 0), 1.0f);
@@ -82,15 +85,22 @@ public class WakeMeUp : MonoBehaviour
 			myszka.localPosition += new Vector3(0, 50 * Time.deltaTime, 0);
 			yield return new WaitForSeconds(0.005f);
 		}
-
-		yield return new WaitForSeconds(1.0f);
+        timeBar.GetComponent<UnityEngine.UI.Image>().canvasRenderer.SetAlpha(1f);
+        yield return new WaitForSeconds(1.0f);
 
 		_isRunning = true;
-		Timming.Start(20.0f, onFinish);
+		Timming.Start(gameTime, onFinish);
 
 		yield return new WaitForSeconds(1.0f);
-		myszka.gameObject.SetActive(false);
+        StartCoroutine("slideMouseIconOutOfTheScreeen");
 	}
+
+    public IEnumerator slideMouseIconOutOfTheScreeen()
+    {
+        var myszka = Head.transform.FindChild("myszka");
+        iTween.MoveBy(myszka.gameObject, new Vector3(0, -1000), 10.0f);
+        yield return null;
+    }
 
 	public IEnumerator WakeUpAnim()
 	{
@@ -106,7 +116,6 @@ public class WakeMeUp : MonoBehaviour
 
 		yield return new WaitForSeconds(0.9f);
 
-		Debug.Log("kutas");
 		//obj.SetActive(true);
 
 		iTween.MoveTo(obj, new Vector3(140, -39, 0), 2.0f);
@@ -127,44 +136,39 @@ public class WakeMeUp : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		// check if update more
-		if (_rightEyePos == 100 || !_isRunning)
+        
+        // check if to update
+        if (!_isRunning || gameWon)
 			return;
 
-		// check input
-		if (Input.GetMouseButtonDown(0))
-		{
-			_leftEyePos += Time.unscaledDeltaTime * MoveUpSpeed * (15 - _leftEyePos * 5);
-		}
-		if (Input.GetMouseButtonDown(1))
-		{
-			_rightEyePos += Time.unscaledDeltaTime * MoveUpSpeed * (15 - _rightEyePos * 5);
-		}
-		
-		// check game finished event
-		const float eyeIsUpWhen = 0.98f;
-		if (_rightEyePos >= eyeIsUpWhen && _leftEyePos >= eyeIsUpWhen)
-		{
-			// Game won
-			Budzik.GetComponent<AudioSource>().Stop();
-			_rightEyePos = 100;
-			GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
-			StartCoroutine("WakeUpAnim");
-			
-		}
-		else
-		{
-			// move eyes down
-			_leftEyePos -= MoveDownSpeed * Time.unscaledDeltaTime;
-			_rightEyePos -= MoveDownSpeed * Time.unscaledDeltaTime;
+        //Update time
+        var timeBarRectTrans = timeBar.transform as RectTransform;
+        timeBarRectTrans.sizeDelta = new Vector2(timmerWidth*Timming.Position,timeBarRectTrans.sizeDelta.y);
+        // Timming.Position*
 
-			// clamp eyes
-			_leftEyePos = Mathf.Clamp01(_leftEyePos);
-			_rightEyePos = Mathf.Clamp01(_rightEyePos);
+        //check eyes states
+        isRightEyeUp = rightEyeScript.getIsEyeUp();
+        isLeftEyeUp = leftEyeScript.getIsEyeUp();
 
-			// move eyes
-			_leftEye.transform.localPosition = _leftEyeInitPos + new Vector3(0, _leftEyePos * _eyesHeight, 0);
-			_rightEye.transform.localPosition = _rightEyeInitPos + new Vector3(0, _rightEyePos * _eyesHeight, 0);
-		}
-	}
+        // check input
+        if (Input.GetMouseButtonDown(0))
+		{ 
+           leftRigidBody.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            rightRigidBody.AddForce(Vector2.up * 30, ForceMode2D.Impulse);
+        }
+
+
+        //Checks if the game is finished
+        if (isRightEyeUp && isLeftEyeUp)
+        {
+            gameWon = true;
+            Budzik.GetComponent<AudioSource>().Stop();
+            _isRunning = false; //should work
+            GameManager.Instance.AddScore((1 - Timming.Position) * 1000.0f);
+            StartCoroutine("WakeUpAnim");
+        }
+    }
 }

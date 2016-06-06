@@ -8,12 +8,12 @@ public class StrokeManager : MonoBehaviour
     public bool touchLeftBorder;
     public bool touchRightBorder;
 
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D EyeRigidbody;
 
     // Use this for initialization
     void Start()
     {
-        rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        EyeRigidbody = gameObject.GetComponent<Rigidbody2D>();
         DayConfigurator(GameManager.Instance._currentDay);
 
     }
@@ -49,15 +49,15 @@ public class StrokeManager : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && !touchLeftBorder)
         {
-            rigidbody.velocity = new Vector2(-strokeSpeed, 0);
+            EyeRigidbody.velocity = new Vector2(-strokeSpeed, 0);
         }
         else if (Input.GetMouseButton(1) && !touchRightBorder)
         {
-            rigidbody.velocity = new Vector2(strokeSpeed, 0);
+            EyeRigidbody.velocity = new Vector2(strokeSpeed, 0);
         }
         else
         {
-            rigidbody.velocity = Vector2.zero;
+            EyeRigidbody.velocity = Vector2.zero;
         }
     }
 }
